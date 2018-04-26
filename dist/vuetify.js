@@ -1,4 +1,3 @@
-/* eslint-disable */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -163,17 +162,18 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["d"] = createSimpleFunctional;
-/* harmony export (immutable) */ __webpack_exports__["e"] = createSimpleTransition;
-/* harmony export (immutable) */ __webpack_exports__["b"] = createJavaScriptTransition;
+/* harmony export (immutable) */ __webpack_exports__["e"] = createSimpleFunctional;
+/* harmony export (immutable) */ __webpack_exports__["f"] = createSimpleTransition;
+/* harmony export (immutable) */ __webpack_exports__["c"] = createJavaScriptTransition;
 /* unused harmony export directiveConfig */
 /* harmony export (immutable) */ __webpack_exports__["a"] = addOnceEventListener;
-/* harmony export (immutable) */ __webpack_exports__["h"] = getObjectValueByPath;
-/* harmony export (immutable) */ __webpack_exports__["c"] = createRange;
-/* harmony export (immutable) */ __webpack_exports__["i"] = getZIndex;
-/* harmony export (immutable) */ __webpack_exports__["f"] = escapeHTML;
-/* harmony export (immutable) */ __webpack_exports__["g"] = filterObjectOnKeys;
+/* harmony export (immutable) */ __webpack_exports__["i"] = getObjectValueByPath;
+/* harmony export (immutable) */ __webpack_exports__["d"] = createRange;
+/* harmony export (immutable) */ __webpack_exports__["j"] = getZIndex;
+/* harmony export (immutable) */ __webpack_exports__["g"] = escapeHTML;
+/* harmony export (immutable) */ __webpack_exports__["h"] = filterObjectOnKeys;
 /* unused harmony export filterChildren */
+/* harmony export (immutable) */ __webpack_exports__["b"] = convertToUnit;
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -184,8 +184,12 @@ function createSimpleFunctional(c) {
 
   name = name || c.replace(/__/g, '-');
 
+  // TODO: remove after close
+  // https://github.com/vuetifyjs/vuetify/issues/1561
+  name = name.split('-')[0] === 'v' ? name : 'v-' + name;
+
   return {
-    name: 'v-' + name,
+    name: name,
     functional: true,
 
     render: function render(h, _ref) {
@@ -308,10 +312,11 @@ function createRange(length) {
 
 function getZIndex(el) {
   if (!el || el.nodeType !== Node.ELEMENT_NODE) return 0;
-  var zi = document.defaultView.getComputedStyle(el).getPropertyValue('z-index');
-  if (isNaN(zi)) return getZIndex(el.parentNode);
 
-  return zi;
+  var index = window.getComputedStyle(el).getPropertyValue('z-index');
+
+  if (isNaN(index)) return getZIndex(el.parentNode);
+  return index;
 }
 
 var tagsToReplace = {
@@ -346,6 +351,12 @@ function filterChildren() {
   return array.filter(function (child) {
     return child.componentOptions && child.componentOptions.Ctor.options.name === tag;
   });
+}
+
+function convertToUnit(str) {
+  var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'px';
+
+  return isNaN(str) ? str : '' + Number(str) + unit;
 }
 
 /***/ }),
@@ -506,27 +517,27 @@ var Toggleable = factory();
 
 
 // Component specific transitions
-var VBottomSheetTranstion = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('bottom-sheet-transition');
-var VCarouselTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('carousel-transition');
-var VCarouselReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('carousel-reverse-transition');
-var VTabTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('tab-transition');
-var VTabReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('tab-reverse-transition');
-var VMenuTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('menu-transition');
-var VFabTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('fab-transition', 'center center', 'out-in');
+var VBottomSheetTranstion = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('bottom-sheet-transition');
+var VCarouselTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('carousel-transition');
+var VCarouselReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('carousel-reverse-transition');
+var VTabTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('tab-transition');
+var VTabReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('tab-reverse-transition');
+var VMenuTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('menu-transition');
+var VFabTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('fab-transition', 'center center', 'out-in');
 
 // Generic transitions
-var VDialogTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('dialog-transition');
-var VDialogBottomTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('dialog-bottom-transition');
-var VFadeTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('fade-transition');
-var VScaleTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('scale-transition');
-var VSlideXTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('slide-x-transition');
-var VSlideXReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('slide-x-reverse-transition');
-var VSlideYTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('slide-y-transition');
-var VSlideYReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('slide-y-reverse-transition');
+var VDialogTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('dialog-transition');
+var VDialogBottomTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('dialog-bottom-transition');
+var VFadeTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('fade-transition');
+var VScaleTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('scale-transition');
+var VSlideXTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('slide-x-transition');
+var VSlideXReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('slide-x-reverse-transition');
+var VSlideYTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('slide-y-transition');
+var VSlideYReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* createSimpleTransition */])('slide-y-reverse-transition');
 
 // JavaScript transitions
-var VExpandTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createJavaScriptTransition */])('expand-transition', Object(__WEBPACK_IMPORTED_MODULE_1__expand_transition__["a" /* default */])());
-var VRowExpandTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createJavaScriptTransition */])('row-expand-transition', Object(__WEBPACK_IMPORTED_MODULE_1__expand_transition__["a" /* default */])('datatable__expand-col--expanded'));
+var VExpandTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["c" /* createJavaScriptTransition */])('expand-transition', Object(__WEBPACK_IMPORTED_MODULE_1__expand_transition__["a" /* default */])());
+var VRowExpandTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["c" /* createJavaScriptTransition */])('row-expand-transition', Object(__WEBPACK_IMPORTED_MODULE_1__expand_transition__["a" /* default */])('datatable__expand-col--expanded'));
 
 /* harmony default export */ __webpack_exports__["g"] = (install);
 /* istanbul ignore next */
@@ -866,7 +877,7 @@ function inserted(el, binding) {
   }
 }
 
-function unbind(el, binding) {
+function unbind(el) {
   var _el$_onResize = el._onResize,
       callback = _el$_onResize.callback,
       options = _el$_onResize.options;
@@ -905,7 +916,7 @@ function factory() {
 
   return {
     name: 'positionable',
-    props: selected.length ? Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["g" /* filterObjectOnKeys */])(props, selected) : props
+    props: selected.length ? Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["h" /* filterObjectOnKeys */])(props, selected) : props
   };
 }
 
@@ -1119,6 +1130,12 @@ function applicationable(value) {
     lazy: Boolean
   },
 
+  computed: {
+    hasContent: function hasContent() {
+      return this.isBooted || !this.lazy || this.isActive;
+    }
+  },
+
   watch: {
     isActive: function isActive() {
       this.isBooted = true;
@@ -1127,7 +1144,7 @@ function applicationable(value) {
 
   methods: {
     showLazyContent: function showLazyContent(content) {
-      return this.isBooted || !this.lazy || this.isActive ? content : null;
+      return this.hasContent ? content : null;
     }
   }
 });
@@ -1159,14 +1176,14 @@ var ripple = {
     var animation = document.createElement('span');
 
     container.appendChild(animation);
-    container.className = 'ripple__container';
+    container.className = 'v-ripple__container';
 
     if (value.class) {
       container.className += ' ' + value.class;
     }
 
     var size = el.clientWidth > el.clientHeight ? el.clientWidth : el.clientHeight;
-    animation.className = 'ripple__animation';
+    animation.className = 'v-ripple__animation';
     animation.style.width = size * (value.center ? 1 : 2) + 'px';
     animation.style.height = animation.style.width;
 
@@ -1178,13 +1195,13 @@ var ripple = {
     var x = value.center ? '50%' : e.clientX - offset.left + 'px';
     var y = value.center ? '50%' : e.clientY - offset.top + 'px';
 
-    animation.classList.add('ripple__animation--enter');
-    animation.classList.add('ripple__animation--visible');
+    animation.classList.add('v-ripple__animation--enter');
+    animation.classList.add('v-ripple__animation--visible');
     style(animation, 'translate(-50%, -50%) translate(' + x + ', ' + y + ') scale3d(0.01,0.01,0.01)');
     animation.dataset.activated = Date.now();
 
     setTimeout(function () {
-      animation.classList.remove('ripple__animation--enter');
+      animation.classList.remove('v-ripple__animation--enter');
       style(animation, 'translate(-50%, -50%) translate(' + x + ', ' + y + ')  scale3d(0.99,0.99,0.99)');
     }, 0);
   },
@@ -1192,7 +1209,7 @@ var ripple = {
   hide: function hide(el) {
     if (!el._ripple || !el._ripple.enabled) return;
 
-    var ripples = el.getElementsByClassName('ripple__animation');
+    var ripples = el.getElementsByClassName('v-ripple__animation');
 
     if (ripples.length === 0) return;
     var animation = ripples[ripples.length - 1];
@@ -1202,14 +1219,16 @@ var ripple = {
     delay = delay < 0 ? 0 : delay;
 
     setTimeout(function () {
-      animation.classList.remove('ripple__animation--visible');
+      animation.classList.remove('v-ripple__animation--visible');
 
       setTimeout(function () {
         // Need to figure out a new way to do this
         try {
           if (ripples.length < 1) el.style.position = null;
           animation.parentNode && el.removeChild(animation.parentNode);
-        } catch (e) {}
+        } catch (e) {
+          console.log(e);
+        }
       }, 300);
     }, delay);
   }
@@ -1277,7 +1296,7 @@ function directive(el, binding) {
   updateRipple(el, binding, false);
 }
 
-function unbind(el, binding) {
+function unbind(el) {
   delete el._ripple;
   removeListeners(el);
 }
@@ -1387,8 +1406,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
 
   methods: {
-    groupFocus: function groupFocus(e) {},
-    groupBlur: function groupBlur(e) {
+    groupFocus: function groupFocus() {},
+    groupBlur: function groupBlur() {
       this.tabFocused = false;
     },
     genLabel: function genLabel() {
@@ -1613,6 +1632,8 @@ function searchChildren(children) {
 
   methods: {
     genRipple: function genRipple() {
+      var _this = this;
+
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { directives: [] };
 
       data.class = this.rippleClasses || 'input-group--selection-controls__ripple';
@@ -1620,9 +1641,12 @@ function searchChildren(children) {
         name: 'ripple',
         value: this.ripple && !this.disabled && { center: true }
       });
-      data.on = Object.assign({
-        click: this.toggle
-      }, this.$listeners);
+      data.on = Object.assign({}, this.$listeners, {
+        click: function click(e) {
+          _this.$emit('click', e);
+          _this.toggle();
+        }
+      });
 
       return this.$createElement('div', data);
     }
@@ -1729,6 +1753,12 @@ function validateAttachTarget(val) {
 
   mixins: [__WEBPACK_IMPORTED_MODULE_0__bootable__["a" /* default */]],
 
+  data: function data() {
+    return {
+      hasDetached: false
+    };
+  },
+
   props: {
     attach: {
       type: null,
@@ -1740,8 +1770,12 @@ function validateAttachTarget(val) {
     }
   },
 
+  watch: {
+    hasContent: 'initDetach'
+  },
+
   mounted: function mounted() {
-    this.initDetach();
+    !this.lazy && this.initDetach();
   },
   deactivated: function deactivated() {
     this.isActive = false;
@@ -1752,13 +1786,15 @@ function validateAttachTarget(val) {
     // IE11 Fix
     try {
       this.$refs.content.parentNode.removeChild(this.$refs.content);
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   },
 
 
   methods: {
     initDetach: function initDetach() {
-      if (this._isDestroyed || !this.$refs.content ||
+      if (this._isDestroyed || !this.$refs.content || this.hasDetached ||
       // Leave menu in place if attached
       // and dev has not changed target
       this.attach === '' || // If used as a boolean prop (<v-menu attach>)
@@ -1784,6 +1820,8 @@ function validateAttachTarget(val) {
       }
 
       target.insertBefore(this.$refs.content, target.firstChild);
+
+      this.hasDetached = true;
     }
   }
 });
@@ -1819,7 +1857,6 @@ function validateAttachTarget(val) {
   methods: {
     save: function save(value) {
       this.originalValue = value;
-      this.$emit('update:returnValue', value);
       this.isActive = false;
     }
   }
@@ -1844,8 +1881,8 @@ function validateAttachTarget(val) {
 
 
 
-var VCardActions = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('card__actions');
-var VCardText = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('card__text');
+var VCardActions = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleFunctional */])('v-card__actions');
+var VCardText = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleFunctional */])('v-card__text');
 
 
 
@@ -2194,7 +2231,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       isDependent: false,
-      stackClass: 'dialog__content__active',
+      stackClass: 'v-dialog__content__active',
       stackMinZIndex: 200
     };
   },
@@ -2228,12 +2265,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     classes: function classes() {
       var _ref;
 
-      return _ref = {}, _defineProperty(_ref, ('dialog ' + this.contentClass).trim(), true), _defineProperty(_ref, 'dialog--active', this.isActive), _defineProperty(_ref, 'dialog--persistent', this.persistent), _defineProperty(_ref, 'dialog--fullscreen', this.fullscreen), _defineProperty(_ref, 'dialog--scrollable', this.scrollable), _ref;
+      return _ref = {}, _defineProperty(_ref, ('v-dialog ' + this.contentClass).trim(), true), _defineProperty(_ref, 'v-dialog--active', this.isActive), _defineProperty(_ref, 'v-dialog--persistent', this.persistent), _defineProperty(_ref, 'v-dialog--fullscreen', this.fullscreen), _defineProperty(_ref, 'v-dialog--scrollable', this.scrollable), _ref;
     },
     contentClasses: function contentClasses() {
       return {
-        'dialog__content': true,
-        'dialog__content__active': this.isActive
+        'v-dialog__content': true,
+        'v-dialog__content__active': this.isActive
       };
     }
   },
@@ -2262,7 +2299,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     closeConditional: function closeConditional(e) {
       // close dialog if !persistent, clicked outside and we're the topmost dialog.
       // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
-      return this.isActive && !this.persistent && Object(__WEBPACK_IMPORTED_MODULE_8__util_helpers__["i" /* getZIndex */])(this.$refs.content) >= this.getMaxZIndex() && !this.$refs.content.contains(e.target);
+      return this.isActive && !this.persistent && Object(__WEBPACK_IMPORTED_MODULE_8__util_helpers__["j" /* getZIndex */])(this.$refs.content) >= this.getMaxZIndex() && !this.$refs.content.contains(e.target);
     },
     show: function show() {
       !this.fullscreen && !this.hideOverlay && this.genOverlay();
@@ -2314,7 +2351,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     if (this.$slots.activator) {
       children.push(h('div', {
-        'class': 'dialog__activator',
+        'class': 'v-dialog__activator',
         on: {
           click: function click(e) {
             e.stopPropagation();
@@ -2339,7 +2376,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, [dialog]));
 
     return h('div', {
-      staticClass: 'dialog__container',
+      staticClass: 'v-dialog__container',
       style: {
         display: !this.$slots.activator || this.fullWidth ? 'block' : 'inline-block'
       }
@@ -2388,13 +2425,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (!this.isActive || this.hideOverlay || this.isActive && this.overlayTimeout || this.overlay) {
         clearTimeout(this.overlayTimeout);
 
-        return this.overlay && this.overlay.classList.add('overlay--active');
+        return this.overlay && this.overlay.classList.add('v-overlay--active');
       }
 
       this.overlay = document.createElement('div');
-      this.overlay.className = 'overlay';
+      this.overlay.className = 'v-overlay';
 
-      if (this.absolute) this.overlay.className += ' overlay--absolute';
+      if (this.absolute) this.overlay.className += ' v-overlay--absolute';
 
       this.hideScroll();
 
@@ -2405,7 +2442,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // eslint-disable-next-line no-unused-expressions
       this.overlay.clientHeight; // Force repaint
       requestAnimationFrame(function () {
-        _this.overlay.className += ' overlay--active';
+        _this.overlay.className += ' v-overlay--active';
 
         if (_this.activeZIndex !== undefined) {
           _this.overlay.style.zIndex = _this.activeZIndex - 1;
@@ -2421,7 +2458,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return this.showScroll();
       }
 
-      this.overlay.classList.remove('overlay--active');
+      this.overlay.classList.remove('v-overlay--active');
 
       this.overlayTimeout = setTimeout(function () {
         // IE11 Fix
@@ -2429,7 +2466,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           _this2.overlay.parentNode.removeChild(_this2.overlay);
           _this2.overlay = null;
           _this2.showScroll();
-        } catch (e) {}
+        } catch (e) {
+          console.log(e);
+        }
 
         clearTimeout(_this2.overlayTimeout);
         _this2.overlayTimeout = null;
@@ -2583,7 +2622,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       var content = this.stackElement || this.$refs.content;
       // Return current zindex if not active
 
-      var index = !this.isActive ? Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["i" /* getZIndex */])(content) : this.getMaxZIndex(this.stackExclude || [content]) + 2;
+      var index = !this.isActive ? Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["j" /* getZIndex */])(content) : this.getMaxZIndex(this.stackExclude || [content]) + 2;
 
       if (index == null) return index;
 
@@ -2599,7 +2638,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       var base = this.stackBase || this.$el;
       // Start with lowest allowed z-index or z-index of
       // base component's element, whichever is greater
-      var zis = [this.stackMinZIndex, Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["i" /* getZIndex */])(base)];
+      var zis = [this.stackMinZIndex, Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["j" /* getZIndex */])(base)];
       // Convert the NodeList to an array to
       // prevent an Edge bug with Symbol.iterator
       // https://github.com/vuetifyjs/vuetify/issues/2146
@@ -2608,7 +2647,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       // Get z-index for all active dialogs
       for (var index = 0; index < activeElements.length; index++) {
         if (!exclude.includes(activeElements[index])) {
-          zis.push(Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["i" /* getZIndex */])(activeElements[index]));
+          zis.push(Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["j" /* getZIndex */])(activeElements[index]));
         }
       }
 
@@ -2691,7 +2730,7 @@ __WEBPACK_IMPORTED_MODULE_0__VJumbotron__["a" /* default */].install = function 
       }, 100);
     },
     afterLeave: function afterLeave(el) {
-      expandedParentClass && el._parent.classList.remove(expandedParentClass);
+      expandedParentClass && el._parent && el._parent.classList.remove(expandedParentClass);
     }
   };
 });
@@ -2912,10 +2951,10 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         totalItems: 0
       },
       expanded: {},
-      actionsClasses: 'data-iterator__actions',
-      actionsRangeControlsClasses: 'data-iterator__actions__range-controls',
-      actionsSelectClasses: 'data-iterator__actions__select',
-      actionsPaginationClasses: 'data-iterator__actions__pagination'
+      actionsClasses: 'v-data-iterator__actions',
+      actionsRangeControlsClasses: 'v-data-iterator__actions__range-controls',
+      actionsSelectClasses: 'v-data-iterator__actions__select',
+      actionsPaginationClasses: 'v-data-iterator__actions__pagination'
     };
   },
 
@@ -2978,8 +3017,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         if (index === null) return items;
 
         return items.sort(function (a, b) {
-          var sortA = Object(__WEBPACK_IMPORTED_MODULE_6__util_helpers__["h" /* getObjectValueByPath */])(a, index);
-          var sortB = Object(__WEBPACK_IMPORTED_MODULE_6__util_helpers__["h" /* getObjectValueByPath */])(b, index);
+          var sortA = Object(__WEBPACK_IMPORTED_MODULE_6__util_helpers__["i" /* getObjectValueByPath */])(a, index);
+          var sortB = Object(__WEBPACK_IMPORTED_MODULE_6__util_helpers__["i" /* getObjectValueByPath */])(b, index);
 
           if (isDescending) {
             var _ref = [sortB, sortA];
@@ -4025,10 +4064,10 @@ __WEBPACK_IMPORTED_MODULE_0__VSubheader__["a" /* default */].install = function 
 
 
 
-var VListTileActionText = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('list__tile__action-text', 'span');
-var VListTileContent = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('list__tile__content', 'div');
-var VListTileTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('list__tile__title', 'div');
-var VListTileSubTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('list__tile__sub-title', 'div');
+var VListTileActionText = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleFunctional */])('v-list__tile__action-text', 'span');
+var VListTileContent = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleFunctional */])('v-list__tile__content', 'div');
+var VListTileTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleFunctional */])('v-list__tile__title', 'div');
+var VListTileSubTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleFunctional */])('v-list__tile__sub-title', 'div');
 
 /* istanbul ignore next */
 __WEBPACK_IMPORTED_MODULE_1__VList__["a" /* default */].install = function install(Vue) {
@@ -4112,7 +4151,7 @@ __WEBPACK_IMPORTED_MODULE_1__VList__["a" /* default */].install = function insta
       }, this.yearIcon);
     },
     getYearBtn: function getYearBtn() {
-      return this.genPickerButton('selectingYear', true, [this.year, this.yearIcon ? this.genYearIcon() : null], 'date-picker-title__year');
+      return this.genPickerButton('selectingYear', true, [this.year, this.yearIcon ? this.genYearIcon() : null], 'v-date-picker-title__year');
     },
     genTitleText: function genTitleText() {
       return this.$createElement('transition', {
@@ -4125,13 +4164,13 @@ __WEBPACK_IMPORTED_MODULE_1__VList__["a" /* default */].install = function insta
       })]);
     },
     genTitleDate: function genTitleDate(title) {
-      return this.genPickerButton('selectingYear', false, this.genTitleText(title), 'date-picker-title__date');
+      return this.genPickerButton('selectingYear', false, this.genTitleText(title), 'v-date-picker-title__date');
     }
   },
 
   render: function render(h) {
     return h('div', {
-      staticClass: 'date-picker-title'
+      staticClass: 'v-date-picker-title'
     }, [this.getYearBtn(), this.genTitleDate()]);
   }
 });
@@ -4155,7 +4194,7 @@ __WEBPACK_IMPORTED_MODULE_1__VList__["a" /* default */].install = function insta
       };
 
       return this.$createElement('div', {
-        staticClass: ('picker__title__btn ' + staticClass).trim(),
+        staticClass: ('v-picker__title__btn ' + staticClass).trim(),
         'class': { active: active },
         on: active ? undefined : { click: click }
       }, Array.isArray(content) ? content : [content]);
@@ -4299,17 +4338,17 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
       }, [header]);
 
       return this.$createElement('div', {
-        staticClass: 'date-picker-header__value',
+        staticClass: 'v-date-picker-header__value',
         class: {
-          'date-picker-header__value--disabled': this.disabled
+          'v-date-picker-header__value--disabled': this.disabled
         }
       }, [transition]);
     }
   },
 
-  render: function render(h) {
+  render: function render() {
     return this.$createElement('div', {
-      staticClass: 'date-picker-header'
+      staticClass: 'v-date-picker-header'
     }, [this.genBtn(-1), this.genHeader(), this.genBtn(+1)]);
   }
 });
@@ -4369,10 +4408,10 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
       var first = parseInt(this.firstDayOfWeek, 10);
 
-      return this.weekdayFormatter ? Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["c" /* createRange */])(7).map(function (i) {
+      return this.weekdayFormatter ? Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["d" /* createRange */])(7).map(function (i) {
         return _this.weekdayFormatter('2017-01-' + (first + i + 15));
       }) // 2017-01-15 is Sunday
-      : Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["c" /* createRange */])(7).map(function (i) {
+      : Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["d" /* createRange */])(7).map(function (i) {
         return ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7];
       });
     }
@@ -4400,7 +4439,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         eventColor = this.eventColor[date];
       }
       return this.$createElement('div', {
-        staticClass: 'date-picker-table__event',
+        staticClass: 'v-date-picker-table__event',
         class: this.addBackgroundColorClassChecks({}, eventColor || this.color)
       });
     },
@@ -4450,8 +4489,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
     }
   },
 
-  render: function render(h) {
-    return this.genTable('date-picker-table date-picker-table--date', [this.genTHead(), this.genTBody()]);
+  render: function render() {
+    return this.genTable('v-date-picker-table v-date-picker-table--date', [this.genTHead(), this.genTBody()]);
   }
 });
 
@@ -4532,13 +4571,13 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
       var isCurrent = value === this.current;
 
       var classes = {
-        'btn--active': isSelected,
-        'btn--flat': !isSelected,
-        'btn--icon': isSelected && !isDisabled && isFloating,
-        'btn--floating': isFloating,
-        'btn--depressed': !isFloating && isSelected,
-        'btn--disabled': isDisabled || this.disabled && isSelected,
-        'btn--outline': isCurrent && !isSelected
+        'v-btn--active': isSelected,
+        'v-btn--flat': !isSelected,
+        'v-btn--icon': isSelected && !isDisabled && isFloating,
+        'v-btn--floating': isFloating,
+        'v-btn--depressed': !isFloating && isSelected,
+        'v-btn--disabled': isDisabled || this.disabled && isSelected,
+        'v-btn--outline': isCurrent && !isSelected
       };
 
       if (isSelected) return this.addBackgroundColorClassChecks(classes);
@@ -4551,14 +4590,14 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
       var isDisabled = !Object(__WEBPACK_IMPORTED_MODULE_2__util_isDateAllowed__["a" /* default */])(value, this.min, this.max, this.allowedDates);
 
       return this.$createElement('button', {
-        staticClass: 'btn',
+        staticClass: 'v-btn',
         'class': this.genButtonClasses(value, isDisabled, isFloating),
         attrs: {
           type: 'button'
         },
         domProps: {
           disabled: isDisabled,
-          innerHTML: '<div class="btn__content">' + this.formatter(value) + '</div>'
+          innerHTML: '<div class="v-btn__content">' + this.formatter(value) + '</div>'
         },
         on: isDisabled ? {} : {
           click: function click() {
@@ -4670,8 +4709,8 @@ function isDateAllowed(date, min, max, allowedFn) {
     }
   },
 
-  render: function render(h) {
-    return this.genTable('date-picker-table date-picker-table--month', [this.genTBody()]);
+  render: function render() {
+    return this.genTable('v-date-picker-table v-date-picker-table--month', [this.genTBody()]);
   }
 });
 
@@ -4759,9 +4798,9 @@ function isDateAllowed(date, min, max, allowedFn) {
     }
   },
 
-  render: function render(h) {
+  render: function render() {
     return this.$createElement('ul', {
-      staticClass: 'date-picker-years',
+      staticClass: 'v-date-picker-years',
       ref: 'years'
     }, this.genYearItems());
   }
@@ -4813,7 +4852,7 @@ function isDateAllowed(date, min, max, allowedFn) {
     genPicker: function genPicker(staticClass) {
       return this.$createElement(__WEBPACK_IMPORTED_MODULE_0__components_VPicker__["a" /* default */], {
         staticClass: staticClass,
-        class: this.fullWidth ? ['picker--full-width'] : [],
+        class: this.fullWidth ? ['v-picker--full-width'] : [],
         props: {
           color: this.headerColor || this.color,
           dark: this.dark,
@@ -4982,7 +5021,7 @@ __WEBPACK_IMPORTED_MODULE_0__VPicker__["a" /* default */].install = function ins
     var _this2 = this;
 
     var data = {
-      staticClass: 'tabs__items',
+      staticClass: 'v-tabs__items',
       directives: []
     };
 
@@ -5023,7 +5062,7 @@ __WEBPACK_IMPORTED_MODULE_0__VPicker__["a" /* default */].install = function ins
 
   render: function render(h) {
     return h('div', {
-      staticClass: 'tabs__slider',
+      staticClass: 'v-tabs__slider',
       class: this.addBackgroundColorClassChecks()
     });
   }
@@ -5075,19 +5114,19 @@ __WEBPACK_IMPORTED_MODULE_0__VPicker__["a" /* default */].install = function ins
       var displayedMinute = this.minute == null ? '--' : Object(__WEBPACK_IMPORTED_MODULE_2__VDatePicker_util__["c" /* pad */])(this.minute);
 
       return this.$createElement('div', {
-        'class': 'time-picker-title__time'
+        'class': 'v-time-picker-title__time'
       }, [this.genPickerButton('selectingHour', true, displayedHour), this.$createElement('span', ':'), this.genPickerButton('selectingHour', false, displayedMinute)]);
     },
     genAmPm: function genAmPm() {
       return this.$createElement('div', {
-        staticClass: 'time-picker-title__ampm'
+        staticClass: 'v-time-picker-title__ampm'
       }, [this.genPickerButton('period', 'am', 'am'), this.genPickerButton('period', 'pm', 'pm')]);
     }
   },
 
   render: function render(h) {
     return h('div', {
-      staticClass: 'time-picker-title'
+      staticClass: 'v-time-picker-title'
     }, [this.genTime(), this.ampm ? this.genAmPm() : null]);
   }
 });
@@ -5222,7 +5261,7 @@ __WEBPACK_IMPORTED_MODULE_0__VPicker__["a" /* default */].install = function ins
       var angle = this.rotate + this.degreesPerUnit * (this.displayedValue - this.min);
 
       return this.$createElement('div', {
-        staticClass: 'time-picker-clock__hand',
+        staticClass: 'v-time-picker-clock__hand',
         'class': this.value == null ? {} : this.addBackgroundColorClassChecks(),
         style: {
           transform: 'rotate(' + angle + 'deg) ' + scale
@@ -5298,13 +5337,13 @@ __WEBPACK_IMPORTED_MODULE_0__VPicker__["a" /* default */].install = function ins
     }
   },
 
-  render: function render(h) {
+  render: function render() {
     var _this = this;
 
     var data = {
-      staticClass: 'time-picker-clock',
+      staticClass: 'v-time-picker-clock',
       class: {
-        'time-picker-clock--indeterminate': this.value == null
+        'v-time-picker-clock--indeterminate': this.value == null
       },
       on: {
         mousedown: this.onMouseDown,
@@ -5354,7 +5393,7 @@ function inserted(el, binding) {
   };
 }
 
-function unbind(el, binding) {
+function unbind(el) {
   if (!el._onScroll) return;
 
   var _el$_onScroll = el._onScroll,
@@ -5398,7 +5437,7 @@ function Vuetify(Vue, args) {
   }, args));
 }
 
-Vuetify.version = '1.0.8';
+Vuetify.version = '1.0.17';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Vuetify);
@@ -5710,6 +5749,8 @@ var THEME_DEFAULTS = {
 function theme() {
   var theme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
+  if (theme === false) return false;
+
   return Object.assign({}, THEME_DEFAULTS, theme);
 }
 
@@ -5721,6 +5762,7 @@ function theme() {
 /* harmony export (immutable) */ __webpack_exports__["a"] = icons;
 // Maps internal Vuetify icon names to actual Material Design icon names.
 var ICONS_MATERIAL = {
+  'complete': 'check',
   'cancel': 'cancel',
   'close': 'close',
   'delete': 'cancel', // delete (e.g. v-chip close)
@@ -5745,6 +5787,7 @@ var ICONS_MATERIAL = {
 
   // Maps internal Vuetify icon names to actual icons from materialdesignicons.com
 };var ICONS_MDI = {
+  'complete': 'mdi-check',
   'cancel': 'mdi-close-circle',
   'close': 'mdi-close',
   'delete': 'mdi-close-circle', // delete (e.g. v-chip close)
@@ -5769,6 +5812,7 @@ var ICONS_MATERIAL = {
 
   // Maps internal Vuetify icon names to actual Font-Awesome 4 icon names.
 };var ICONS_FONTAWESOME4 = {
+  'complete': 'fa fa-check',
   'cancel': 'fa fa-times-circle',
   'close': 'fa fa-times',
   'delete': 'fa fa-times-circle', // delete (e.g. v-chip close)
@@ -5793,6 +5837,7 @@ var ICONS_MATERIAL = {
 
   // Maps internal Vuetify icon names to actual Font-Awesome 5+ icon names.
 };var ICONS_FONTAWESOME = {
+  'complete': 'fas fa-check',
   'cancel': 'fas fa-times-circle',
   'close': 'fas fa-times',
   'delete': 'fas fa-times-circle', // delete (e.g. v-chip close)
@@ -5874,16 +5919,18 @@ function getWindowHeight() {
 }
 
 function isVueComponent(obj) {
-  return obj && obj.constructor && obj.constructor.name === 'VueComponent';
+  return obj != null && obj._isVue;
 }
 
 function getTargetLocation(target, settings) {
   var location = void 0;
 
+  if (isVueComponent(target)) {
+    target = target.$el;
+  }
+
   if (target instanceof Element) {
-    location = target.offsetTop;
-  } else if (isVueComponent(target)) {
-    location = target.$el.offsetTop;
+    location = target.getBoundingClientRect().top + window.scrollY;
   } else if (typeof target === 'string') {
     location = document.querySelector(target).offsetTop;
   } else if (typeof target === 'number') {
@@ -5907,7 +5954,7 @@ function goTo(target, options) {
   var easingFunction = typeof settings.easing === 'function' ? settings.easing : __WEBPACK_IMPORTED_MODULE_1__util_easing_patterns__[settings.easing];
 
   if (isNaN(targetLocation)) {
-    var type = target && target.constructor ? target.constructor.name : target;
+    var type = target == null ? target : target.constructor.name;
     return Object(__WEBPACK_IMPORTED_MODULE_0__util_console__["a" /* consoleError */])('Target must be a Selector/Number/DOMElement/VueComponent, received ' + type + ' instead.');
   }
   if (!easingFunction) return Object(__WEBPACK_IMPORTED_MODULE_0__util_console__["a" /* consoleError */])('Easing function \'' + settings.easing + '\' not found.');
@@ -5917,7 +5964,9 @@ function goTo(target, options) {
     var targetPosition = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage));
 
     window.scrollTo(0, targetPosition);
-    if (Math.round(window.pageYOffset) === targetLocation) return;
+
+    if (Math.round(window.pageYOffset) === targetLocation || progressPercentage === 1) return;
+
     window.requestAnimationFrame(step);
   }
 
@@ -6123,6 +6172,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       var colors = Object.keys(theme);
+
+      if (!colors.length) return '';
+
       css = 'a { color: ' + Object(__WEBPACK_IMPORTED_MODULE_0__util_colorUtils__["b" /* intToHex */])(theme.primary) + '; }';
 
       for (var i = 0; i < colors.length; ++i) {
@@ -6146,6 +6198,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return css;
     },
     vueMeta: function vueMeta() {
+      if (this.$vuetify.theme === false) return;
       return {
         style: [{
           cssText: this.generatedStyles,
@@ -6175,6 +6228,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
 
   created: function created() {
+    if (this.$vuetify.theme === false) return;
+
     if (this.$meta) {
       // Vue-meta
       // Handled by metaInfo()/nuxt()
@@ -6600,8 +6655,8 @@ __WEBPACK_IMPORTED_MODULE_0__VAlert__["a" /* default */].install = function inst
     classes: function classes() {
       var color = this.type && !this.color ? this.type : this.computedColor;
       var classes = {
-        'alert--dismissible': this.dismissible,
-        'alert--outline': this.outline
+        'v-alert--dismissible': this.dismissible,
+        'v-alert--outline': this.outline
       };
 
       return this.outline ? this.addTextColorClassChecks(classes, color) : this.addBackgroundColorClassChecks(classes, color);
@@ -6629,13 +6684,13 @@ __WEBPACK_IMPORTED_MODULE_0__VAlert__["a" /* default */].install = function inst
 
     if (this.computedIcon) {
       children.unshift(h(__WEBPACK_IMPORTED_MODULE_1__VIcon__["a" /* default */], {
-        'class': 'alert__icon'
+        'class': 'v-alert__icon'
       }, this.computedIcon));
     }
 
     if (this.dismissible) {
       var close = h('a', {
-        'class': 'alert__dismissible',
+        'class': 'v-alert__dismissible',
         on: { click: function click() {
             return _this.$emit('input', false);
           } }
@@ -6649,7 +6704,7 @@ __WEBPACK_IMPORTED_MODULE_0__VAlert__["a" /* default */].install = function inst
     }
 
     var alert = h('div', {
-      staticClass: 'alert',
+      staticClass: 'v-alert',
       'class': this.classes,
       directives: [{
         name: 'show',
@@ -6683,9 +6738,9 @@ __WEBPACK_IMPORTED_MODULE_0__VAlert__["a" /* default */].install = function inst
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stylus_components_icons_styl__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stylus_components_icons_styl___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__stylus_components_icons_styl__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_helpers__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_themeable__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_colorable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_themeable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_colorable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_helpers__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -6721,7 +6776,7 @@ function remapInternalIcon(parent, iconName) {
   }
 
   // Now look up icon indirection name, e.g. '$vuetify.icons.cancel':
-  return Object(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["h" /* getObjectValueByPath */])(parent, iconName) || iconName;
+  return Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["i" /* getObjectValueByPath */])(parent, iconName) || iconName;
 }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -6729,7 +6784,7 @@ function remapInternalIcon(parent, iconName) {
 
   functional: true,
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_3__mixins_colorable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_themeable__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_colorable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_themeable__["a" /* default */]],
 
   props: {
     disabled: Boolean,
@@ -6759,7 +6814,7 @@ function remapInternalIcon(parent, iconName) {
     var explicitSize = Object.keys(sizes).find(function (key) {
       return sizes[key] && key;
     });
-    var fontSize = explicitSize && SIZE_MAP[explicitSize] || props.size;
+    var fontSize = explicitSize && SIZE_MAP[explicitSize] || Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["b" /* convertToUnit */])(props.size);
 
     if (fontSize) data.style = _extends({ fontSize: fontSize }, data.style);
 
@@ -6798,18 +6853,18 @@ function remapInternalIcon(parent, iconName) {
     }
 
     var classes = Object.assign({
-      'icon--disabled': props.disabled,
-      'icon--left': props.left,
-      'icon--right': props.right,
+      'v-icon--disabled': props.disabled,
+      'v-icon--left': props.left,
+      'v-icon--right': props.right,
       'theme--dark': props.dark,
       'theme--light': props.light
-    }, props.color ? __WEBPACK_IMPORTED_MODULE_3__mixins_colorable__["a" /* default */].methods.addTextColorClassChecks.call(props, {}, props.color) : {});
+    }, props.color ? __WEBPACK_IMPORTED_MODULE_2__mixins_colorable__["a" /* default */].methods.addTextColorClassChecks.call(props, {}, props.color) : {});
 
     // Order classes
     // * Component class
     // * Vuetify classes
     // * Icon Classes
-    data.staticClass = ['icon', data.staticClass, Object.keys(classes).filter(function (k) {
+    data.staticClass = ['v-icon', data.staticClass, Object.keys(classes).filter(function (k) {
       return classes[k];
     }).join(' '), iconType, isCustomIcon ? iconName : null].reduce(function (prev, curr) {
       return curr ? prev + ' ' + curr : prev;
@@ -6833,9 +6888,11 @@ function remapInternalIcon(parent, iconName) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stylus_components_avatars_styl__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stylus_components_avatars_styl___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__stylus_components_avatars_styl__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_colorable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_helpers__ = __webpack_require__(2);
 
 
 // Mixins
+
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -6858,12 +6915,12 @@ function remapInternalIcon(parent, iconName) {
         props = _ref.props,
         children = _ref.children;
 
-    data.staticClass = ('avatar ' + (data.staticClass || '')).trim();
+    data.staticClass = ('v-avatar ' + (data.staticClass || '')).trim();
     data.style = data.style || {};
 
-    if (props.tile) data.staticClass += ' avatar--tile';
+    if (props.tile) data.staticClass += ' v-avatar--tile';
 
-    var size = parseInt(props.size) + 'px';
+    var size = Object(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["b" /* convertToUnit */])(props.size);
     data.style.height = size;
     data.style.width = size;
     data.class = [data.class, __WEBPACK_IMPORTED_MODULE_1__mixins_colorable__["a" /* default */].methods.addBackgroundColorClassChecks.call(props, {}, props.color)];
@@ -6935,16 +6992,16 @@ __WEBPACK_IMPORTED_MODULE_0__VBadge__["a" /* default */].install = function inst
   computed: {
     classes: function classes() {
       return {
-        'badge--bottom': this.bottom,
-        'badge--left': this.left,
-        'badge--overlap': this.overlap
+        'v-badge--bottom': this.bottom,
+        'v-badge--left': this.left,
+        'v-badge--overlap': this.overlap
       };
     }
   },
 
   render: function render(h) {
     var badge = this.$slots.badge ? [h('span', {
-      staticClass: 'badge__badge',
+      staticClass: 'v-badge__badge',
       'class': this.addBackgroundColorClassChecks(),
       attrs: this.attrs,
       directives: [{
@@ -6954,7 +7011,7 @@ __WEBPACK_IMPORTED_MODULE_0__VBadge__["a" /* default */].install = function inst
     }, this.$slots.badge)] : null;
 
     return h('span', {
-      staticClass: 'badge',
+      staticClass: 'v-badge',
       'class': this.classes
     }, [this.$slots.default, h('transition', {
       props: {
@@ -7032,10 +7089,10 @@ __WEBPACK_IMPORTED_MODULE_0__VBottomNav__["a" /* default */].install = function 
   computed: {
     classes: function classes() {
       return {
-        'bottom-nav--absolute': this.absolute,
-        'bottom-nav--fixed': !this.absolute && (this.app || this.fixed),
-        'bottom-nav--shift': this.shift,
-        'bottom-nav--active': this.value
+        'v-bottom-nav--absolute': this.absolute,
+        'v-bottom-nav--fixed': !this.absolute && (this.app || this.fixed),
+        'v-bottom-nav--shift': this.shift,
+        'v-bottom-nav--active': this.value
       };
     },
     computedHeight: function computedHeight() {
@@ -7066,7 +7123,7 @@ __WEBPACK_IMPORTED_MODULE_0__VBottomNav__["a" /* default */].install = function 
 
   render: function render(h) {
     return h('div', {
-      staticClass: 'bottom-nav',
+      staticClass: 'v-bottom-nav',
       class: this.addBackgroundColorClassChecks(this.classes),
       style: {
         height: parseInt(this.computedHeight) + 'px'
@@ -7133,14 +7190,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       slot: 'activator'
     }, this.$slots.activator);
 
-    var contentClass = ['bottom-sheet', this.inset ? 'bottom-sheet--inset' : ''].join(' ');
+    var contentClass = ['v-bottom-sheet', this.inset ? 'v-bottom-sheet--inset' : ''].join(' ');
 
     return h(__WEBPACK_IMPORTED_MODULE_1__VDialog_VDialog__["a" /* default */], {
       attrs: _extends({}, this.$props),
       on: _extends({}, this.$listeners),
       props: {
         contentClass: contentClass,
-        transition: 'bottom-sheet-transition',
+        transition: 'v-bottom-sheet-transition',
         value: this.value
       }
     }, [activator, this.$slots.default]);
@@ -7212,7 +7269,7 @@ __WEBPACK_IMPORTED_MODULE_0__VBreadcrumbs__["a" /* default */].install = functio
   computed: {
     classes: function classes() {
       return {
-        'breadcrumbs--large': this.large
+        'v-breadcrumbs--large': this.large
       };
     },
     computedDivider: function computedDivider() {
@@ -7238,17 +7295,23 @@ __WEBPACK_IMPORTED_MODULE_0__VBreadcrumbs__["a" /* default */].install = functio
       if (!this.$slots.default) return null;
 
       var children = [];
-      var dividerData = { staticClass: 'breadcrumbs__divider' };
-      var length = this.$slots.default.length;
+      var divider = this.$createElement('li', {
+        staticClass: 'v-breadcrumbs__divider'
+      }, this.computedDivider);
 
-      for (var i = 0; i < length; i++) {
+      var createDividers = false;
+      for (var i = 0; i < this.$slots.default.length; i++) {
         var elm = this.$slots.default[i];
-        children.push(elm);
 
-        // TODO: use the component name instead of tag
-        if (!elm.componentOptions || elm.componentOptions.tag !== 'v-breadcrumbs-item' || i === length - 1) continue;
-
-        children.push(this.$createElement('li', dividerData, this.computedDivider));
+        if (!elm.componentOptions || elm.componentOptions.Ctor.options.name !== 'v-breadcrumbs-item') {
+          children.push(elm);
+        } else {
+          if (createDividers) {
+            children.push(divider);
+          }
+          children.push(elm);
+          createDividers = true;
+        }
       }
 
       return children;
@@ -7257,7 +7320,7 @@ __WEBPACK_IMPORTED_MODULE_0__VBreadcrumbs__["a" /* default */].install = functio
 
   render: function render(h) {
     return h('ul', {
-      staticClass: 'breadcrumbs',
+      staticClass: 'v-breadcrumbs',
       'class': this.classes,
       style: this.styles
     }, this.genChildren());
@@ -7290,14 +7353,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     // active item should be dimmed
     activeClass: {
       type: String,
-      default: 'breadcrumbs__item--disabled'
+      default: 'v-breadcrumbs__item--disabled'
     }
   },
 
   computed: {
     classes: function classes() {
       return _defineProperty({
-        'breadcrumbs__item': true
+        'v-breadcrumbs__item': true
       }, this.activeClass, this.disabled);
     }
   },
@@ -7353,7 +7416,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   props: {
     activeClass: {
       type: String,
-      default: 'btn--active'
+      default: 'v-btn--active'
     },
     block: Boolean,
     depressed: Boolean,
@@ -7385,8 +7448,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _extends2;
 
       var classes = _extends((_extends2 = {
-        'btn': true
-      }, _defineProperty(_extends2, this.activeClass, this.isActive), _defineProperty(_extends2, 'btn--absolute', this.absolute), _defineProperty(_extends2, 'btn--block', this.block), _defineProperty(_extends2, 'btn--bottom', this.bottom), _defineProperty(_extends2, 'btn--disabled', this.disabled), _defineProperty(_extends2, 'btn--flat', this.flat), _defineProperty(_extends2, 'btn--floating', this.fab), _defineProperty(_extends2, 'btn--fixed', this.fixed), _defineProperty(_extends2, 'btn--hover', this.hover), _defineProperty(_extends2, 'btn--icon', this.icon), _defineProperty(_extends2, 'btn--large', this.large), _defineProperty(_extends2, 'btn--left', this.left), _defineProperty(_extends2, 'btn--loader', this.loading), _defineProperty(_extends2, 'btn--outline', this.outline), _defineProperty(_extends2, 'btn--depressed', this.depressed && !this.flat || this.outline), _defineProperty(_extends2, 'btn--right', this.right), _defineProperty(_extends2, 'btn--round', this.round), _defineProperty(_extends2, 'btn--router', this.to), _defineProperty(_extends2, 'btn--small', this.small), _defineProperty(_extends2, 'btn--top', this.top), _extends2), this.themeClasses);
+        'v-btn': true
+      }, _defineProperty(_extends2, this.activeClass, this.isActive), _defineProperty(_extends2, 'v-btn--absolute', this.absolute), _defineProperty(_extends2, 'v-btn--block', this.block), _defineProperty(_extends2, 'v-btn--bottom', this.bottom), _defineProperty(_extends2, 'v-btn--disabled', this.disabled), _defineProperty(_extends2, 'v-btn--flat', this.flat), _defineProperty(_extends2, 'v-btn--floating', this.fab), _defineProperty(_extends2, 'v-btn--fixed', this.fixed), _defineProperty(_extends2, 'v-btn--hover', this.hover), _defineProperty(_extends2, 'v-btn--icon', this.icon), _defineProperty(_extends2, 'v-btn--large', this.large), _defineProperty(_extends2, 'v-btn--left', this.left), _defineProperty(_extends2, 'v-btn--loader', this.loading), _defineProperty(_extends2, 'v-btn--outline', this.outline), _defineProperty(_extends2, 'v-btn--depressed', this.depressed && !this.flat || this.outline), _defineProperty(_extends2, 'v-btn--right', this.right), _defineProperty(_extends2, 'v-btn--round', this.round), _defineProperty(_extends2, 'v-btn--router', this.to), _defineProperty(_extends2, 'v-btn--small', this.small), _defineProperty(_extends2, 'v-btn--top', this.top), _extends2), this.themeClasses);
 
       return !this.outline && !this.flat ? this.addBackgroundColorClassChecks(classes) : this.addTextColorClassChecks(classes);
     }
@@ -7400,7 +7463,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$emit('click', e);
     },
     genContent: function genContent() {
-      return this.$createElement('div', { 'class': 'btn__content' }, [this.$slots.default]);
+      return this.$createElement('div', { 'class': 'v-btn__content' }, [this.$slots.default]);
     },
     genLoader: function genLoader() {
       var children = [];
@@ -7409,14 +7472,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         children.push(this.$createElement(__WEBPACK_IMPORTED_MODULE_1__VProgressCircular__["a" /* default */], {
           props: {
             indeterminate: true,
-            size: 26
+            size: 23,
+            width: 2
           }
         }));
       } else {
         children.push(this.$slots.loader);
       }
 
-      return this.$createElement('span', { 'class': 'btn__loading' }, children);
+      return this.$createElement('span', { 'class': 'v-btn__loading' }, children);
     }
   },
 
@@ -7497,26 +7561,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   computed: {
     calculatedSize: function calculatedSize() {
-      var size = Number(this.size);
-
-      if (this.button) {
-        size += 8;
-      }
-
-      return size;
+      return Number(this.size) + (this.button ? 8 : 0);
     },
     circumference: function circumference() {
       return 2 * Math.PI * this.radius;
     },
     classes: function classes() {
       return this.addTextColorClassChecks({
-        'progress-circular': true,
-        'progress-circular--indeterminate': this.indeterminate,
-        'progress-circular--button': this.button
+        'v-progress-circular': true,
+        'v-progress-circular--indeterminate': this.indeterminate,
+        'v-progress-circular--button': this.button
       });
-    },
-    cxy: function cxy() {
-      return this.indeterminate && !this.button ? 50 : this.calculatedSize / 2;
     },
     normalizedValue: function normalizedValue() {
       if (this.value < 0) {
@@ -7530,7 +7585,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.value;
     },
     radius: function radius() {
-      return this.indeterminate && !this.button ? 20 : (this.calculatedSize - this.width) / 2;
+      return 20;
     },
     strokeDashArray: function strokeDashArray() {
       return Math.round(this.circumference * 1000) / 1000;
@@ -7538,57 +7593,55 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     strokeDashOffset: function strokeDashOffset() {
       return (100 - this.normalizedValue) / 100 * this.circumference + 'px';
     },
+    strokeWidth: function strokeWidth() {
+      return this.width / this.size * this.viewBoxSize * 2;
+    },
     styles: function styles() {
       return {
         height: this.calculatedSize + 'px',
         width: this.calculatedSize + 'px'
       };
     },
-    svgSize: function svgSize() {
-      return this.indeterminate ? false : this.calculatedSize;
-    },
     svgStyles: function svgStyles() {
       return {
         transform: 'rotate(' + this.rotate + 'deg)'
       };
     },
-    viewBox: function viewBox() {
-      return this.indeterminate ? '25 25 50 50' : false;
+    viewBoxSize: function viewBoxSize() {
+      return this.radius / (1 - this.width / this.size);
     }
   },
 
   methods: {
     genCircle: function genCircle(h, name, offset) {
       return h('circle', {
-        class: 'progress-circular__' + name,
+        class: 'v-progress-circular__' + name,
         attrs: {
           fill: 'transparent',
-          cx: this.cxy,
-          cy: this.cxy,
+          cx: 2 * this.viewBoxSize,
+          cy: 2 * this.viewBoxSize,
           r: this.radius,
-          'stroke-width': this.width,
+          'stroke-width': this.strokeWidth,
           'stroke-dasharray': this.strokeDashArray,
           'stroke-dashoffset': offset
         }
       });
     },
     genSvg: function genSvg(h) {
-      var children = [!this.indeterminate && this.genCircle(h, 'underlay', 0), this.genCircle(h, 'overlay', this.strokeDashOffset)];
+      var children = [this.indeterminate || this.genCircle(h, 'underlay', 0), this.genCircle(h, 'overlay', this.strokeDashOffset)];
 
       return h('svg', {
         style: this.svgStyles,
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
-          height: this.svgSize,
-          width: this.svgSize,
-          viewBox: this.viewBox
+          viewBox: this.viewBoxSize + ' ' + this.viewBoxSize + ' ' + 2 * this.viewBoxSize + ' ' + 2 * this.viewBoxSize
         }
       }, children);
     }
   },
 
   render: function render(h) {
-    var info = h('div', { class: 'progress-circular__info' }, [this.$slots.default]);
+    var info = h('div', { class: 'v-progress-circular__info' }, [this.$slots.default]);
     var svg = this.genSvg(h);
 
     return h('div', {
@@ -7657,8 +7710,8 @@ __WEBPACK_IMPORTED_MODULE_0__VBtnToggle__["a" /* default */].install = function 
   computed: {
     classes: function classes() {
       return {
-        'btn-toggle': true,
-        'btn-toggle--selected': this.hasValue,
+        'v-btn-toggle': true,
+        'v-btn-toggle--selected': this.hasValue,
         'theme--light': this.light,
         'theme--dark': this.dark
       };
@@ -7780,12 +7833,12 @@ __WEBPACK_IMPORTED_MODULE_0__VBtnToggle__["a" /* default */].install = function 
   computed: {
     classes: function classes() {
       return this.addBackgroundColorClassChecks({
-        'card': true,
-        'card--flat': this.flat,
-        'card--horizontal': this.horizontal,
-        'card--hover': this.hover,
-        'card--raised': this.raised,
-        'card--tile': this.tile,
+        'v-card': true,
+        'v-card--flat': this.flat,
+        'v-card--horizontal': this.horizontal,
+        'v-card--hover': this.hover,
+        'v-card--raised': this.raised,
+        'v-card--tile': this.tile,
         'theme--light': this.light,
         'theme--dark': this.dark
       });
@@ -7845,7 +7898,7 @@ __WEBPACK_IMPORTED_MODULE_0__VBtnToggle__["a" /* default */].install = function 
 
   render: function render(h) {
     var data = {
-      'class': 'card__media',
+      'class': 'v-card__media',
       style: {
         height: !isNaN(this.height) ? this.height + 'px' : this.height
       },
@@ -7856,15 +7909,15 @@ __WEBPACK_IMPORTED_MODULE_0__VBtnToggle__["a" /* default */].install = function 
 
     if (this.src) {
       children.push(h('div', {
-        'class': 'card__media__background',
+        'class': 'v-card__media__background',
         style: {
-          background: 'url(' + this.src + ') center center / ' + (this.contain ? 'contain' : 'cover') + ' no-repeat'
+          background: 'url("' + this.src + '") center center / ' + (this.contain ? 'contain' : 'cover') + ' no-repeat'
         }
       }));
     }
 
     children.push(h('div', {
-      'class': 'card__media__content'
+      'class': 'v-card__media__content'
     }, this.$slots.default));
 
     return h('div', data, children);
@@ -7890,9 +7943,9 @@ __WEBPACK_IMPORTED_MODULE_0__VBtnToggle__["a" /* default */].install = function 
         props = _ref.props,
         children = _ref.children;
 
-    data.staticClass = ('card__title ' + (data.staticClass || '')).trim();
+    data.staticClass = ('v-card__title ' + (data.staticClass || '')).trim();
 
-    if (props.primaryTitle) data.staticClass += ' card__title--primary';
+    if (props.primaryTitle) data.staticClass += ' v-card__title--primary';
 
     return h('div', data, children);
   }
@@ -8032,14 +8085,14 @@ __WEBPACK_IMPORTED_MODULE_0__VCarousel__["a" /* default */].install = function i
   methods: {
     genDelimiters: function genDelimiters() {
       return this.$createElement('div', {
-        staticClass: 'carousel__controls'
+        staticClass: 'v-carousel__controls'
       }, this.genItems());
     },
     genIcon: function genIcon(direction, icon, fn) {
       if (!icon) return null;
 
       return this.$createElement('div', {
-        staticClass: 'carousel__' + direction
+        staticClass: 'v-carousel__' + direction
       }, [this.$createElement(__WEBPACK_IMPORTED_MODULE_1__VBtn__["a" /* default */], {
         props: {
           icon: true,
@@ -8057,8 +8110,8 @@ __WEBPACK_IMPORTED_MODULE_0__VCarousel__["a" /* default */].install = function i
       return this.items.map(function (item, index) {
         return _this.$createElement(__WEBPACK_IMPORTED_MODULE_1__VBtn__["a" /* default */], {
           class: {
-            'carousel__controls__item': true,
-            'carousel__controls__item--active': index === _this.inputValue
+            'v-carousel__controls__item': true,
+            'v-carousel__controls__item--active': index === _this.inputValue
           },
           props: {
             icon: true,
@@ -8116,7 +8169,7 @@ __WEBPACK_IMPORTED_MODULE_0__VCarousel__["a" /* default */].install = function i
 
   render: function render(h) {
     return h('div', {
-      staticClass: 'carousel',
+      staticClass: 'v-carousel',
       directives: [{
         name: 'touch',
         value: {
@@ -8271,14 +8324,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   methods: {
     genBackground: function genBackground() {
       return this.$createElement('div', {
-        staticClass: 'jumbotron__background',
+        staticClass: 'v-jumbotron__background',
         'class': this.addBackgroundColorClassChecks(),
         style: this.backgroundStyles
       });
     },
     genContent: function genContent() {
       return this.$createElement('div', {
-        staticClass: 'jumbotron__content'
+        staticClass: 'v-jumbotron__content'
       }, this.$slots.default);
     },
     genImage: function genImage() {
@@ -8286,13 +8339,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       if (this.$slots.img) return this.$slots.img({ src: this.src });
 
       return this.$createElement('img', {
-        staticClass: 'jumbotron__image',
+        staticClass: 'v-jumbotron__image',
         attrs: { src: this.src }
       });
     },
     genWrapper: function genWrapper() {
       return this.$createElement('div', {
-        staticClass: 'jumbotron__wrapper'
+        staticClass: 'v-jumbotron__wrapper'
       }, [this.genImage(), this.genBackground(), this.genContent()]);
     }
   },
@@ -8302,7 +8355,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         tag = _generateRouteLink.tag,
         data = _generateRouteLink.data;
 
-    data.staticClass = 'jumbotron';
+    data.staticClass = 'v-jumbotron';
     data.style = this.styles;
 
     return h(tag, data, [this.genWrapper()]);
@@ -8384,7 +8437,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.isFocused = true;
       this.$emit('focus', e);
     },
-    groupBlur: function groupBlur(e) {
+    groupBlur: function groupBlur() {
       this.isFocused = false;
       this.tabFocused = false;
       this.$emit('blur', this.inputValue);
@@ -8393,7 +8446,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   render: function render(h) {
     var transition = h(__WEBPACK_IMPORTED_MODULE_3__transitions__["b" /* VFadeTransition */], [h(__WEBPACK_IMPORTED_MODULE_2__VIcon__["a" /* default */], {
-      staticClass: 'icon--selection-control',
+      staticClass: 'v-icon--selection-control',
       'class': {
         'icon--checkbox': this.icon === '$vuetify.icons.checkboxOn'
       },
@@ -8509,7 +8562,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     genDeterminate: function genDeterminate(h) {
       return h('div', {
         ref: 'front',
-        staticClass: 'progress-linear__bar__determinate',
+        staticClass: 'v-progress-linear__bar__determinate',
         class: this.addBackgroundColorClassChecks(),
         style: {
           width: this.effectiveWidth + '%'
@@ -8518,16 +8571,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     genBar: function genBar(h, name) {
       return h('div', {
-        staticClass: 'progress-linear__bar__indeterminate',
+        staticClass: 'v-progress-linear__bar__indeterminate',
         class: this.addBackgroundColorClassChecks(_defineProperty({}, name, true))
       });
     },
     genIndeterminate: function genIndeterminate(h) {
       return h('div', {
         ref: 'front',
-        staticClass: 'progress-linear__bar__indeterminate',
+        staticClass: 'v-progress-linear__bar__indeterminate',
         class: {
-          'progress-linear__bar__indeterminate--active': this.active
+          'v-progress-linear__bar__indeterminate--active': this.active
         }
       }, [this.genBar(h, 'long'), this.genBar(h, 'short')]);
     }
@@ -8538,19 +8591,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var slide = h(__WEBPACK_IMPORTED_MODULE_2__transitions__["d" /* VSlideXTransition */], [!this.indeterminate && this.genDeterminate(h)]);
 
     var bar = h('div', {
-      staticClass: 'progress-linear__bar',
+      staticClass: 'v-progress-linear__bar',
       style: this.styles
     }, [fade, slide]);
     var background = h('div', {
-      staticClass: 'progress-linear__background',
+      staticClass: 'v-progress-linear__background',
       class: [this.backgroundColor || this.color],
       style: this.backgroundStyle
     });
 
     return h('div', {
-      staticClass: 'progress-linear',
+      staticClass: 'v-progress-linear',
       class: {
-        'progress-linear--query': this.query
+        'v-progress-linear--query': this.query
       },
       style: {
         height: this.height + 'px'
@@ -8753,12 +8806,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   computed: {
     classes: function classes() {
       var classes = this.addBackgroundColorClassChecks({
-        'chip--disabled': this.disabled,
-        'chip--selected': this.selected,
-        'chip--label': this.label,
-        'chip--outline': this.outline,
-        'chip--small': this.small,
-        'chip--removable': this.close,
+        'v-chip--disabled': this.disabled,
+        'v-chip--selected': this.selected,
+        'v-chip--label': this.label,
+        'v-chip--outline': this.outline,
+        'v-chip--small': this.small,
+        'v-chip--removable': this.close,
         'theme--light': this.light,
         'theme--dark': this.dark
       });
@@ -8772,7 +8825,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var _this = this;
 
       var data = {
-        staticClass: 'chip__close',
+        staticClass: 'v-chip__close',
         on: {
           click: function click(e) {
             e.stopPropagation();
@@ -8790,14 +8843,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       this.close && children.push(this.genClose(h));
 
       return h('span', {
-        staticClass: 'chip__content'
+        staticClass: 'v-chip__content'
       }, children);
     }
   },
 
   render: function render(h) {
     var data = {
-      staticClass: 'chip',
+      staticClass: 'v-chip',
       'class': this.classes,
       attrs: { tabindex: this.disabled ? -1 : 0 },
       directives: [{
@@ -8868,8 +8921,8 @@ __WEBPACK_IMPORTED_MODULE_0__VDataIterator__["a" /* default */].install = functi
   computed: {
     classes: function classes() {
       return {
-        'data-iterator': true,
-        'data-iterator--select-all': this.selectAll !== false,
+        'v-data-iterator': true,
+        'v-data-iterator--select-all': this.selectAll !== false,
         'theme--dark': this.dark,
         'theme--light': this.light
       };
@@ -9229,7 +9282,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }
   },
 
-  render: function render(h) {
+  render: function render() {
     var _this8 = this;
 
     var data = {
@@ -9485,19 +9538,19 @@ var unmaskText = function unmaskText(text) {
     genFiltered: function genFiltered(text) {
       text = (text || '').toString();
 
-      if (!this.isAutocomplete || !this.searchValue || this.filteredItems.length < 1) return Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* escapeHTML */])(text);
+      if (!this.isAutocomplete || !this.searchValue || this.filteredItems.length < 1) return Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["g" /* escapeHTML */])(text);
 
       var _getMaskedCharacters = this.getMaskedCharacters(text),
           start = _getMaskedCharacters.start,
           middle = _getMaskedCharacters.middle,
           end = _getMaskedCharacters.end;
 
-      return '' + Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* escapeHTML */])(start) + this.genHighlight(middle) + Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* escapeHTML */])(end);
+      return '' + Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["g" /* escapeHTML */])(start) + this.genHighlight(middle) + Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["g" /* escapeHTML */])(end);
     },
     genHighlight: function genHighlight(text) {
-      if (this.isNotFiltering) return Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* escapeHTML */])(text);
+      if (this.isNotFiltering) return Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["g" /* escapeHTML */])(text);
 
-      return '<span class="list__tile__mask">' + Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* escapeHTML */])(text) + '</span>';
+      return '<span class="list__tile__mask">' + Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["g" /* escapeHTML */])(text) + '</span>';
     },
     getMaskedCharacters: function getMaskedCharacters(text) {
       var searchValue = (this.searchValue || '').toString().toLowerCase();
@@ -9832,7 +9885,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
           _this2.selectedIndex > -1 ? _this2.selectedIndex = -1 : _this2.focus();
         },
-        focus: function focus(e) {
+        focus: function focus() {
           if (_this2.disabled || _this2.readonly || _this2.isFocused) {
             return;
           }
@@ -10131,12 +10184,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       var active = this.selectedItems.indexOf(item) !== -1;
 
       if (typeof disabled === 'undefined') {
-        disabled = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["h" /* getObjectValueByPath */])(item, this.itemDisabled);
+        disabled = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["i" /* getObjectValueByPath */])(item, this.itemDisabled);
       }
 
       var data = {
         on: {
-          click: function click(e) {
+          click: function click() {
             if (disabled) return;
 
             _this5.selectItem(item);
@@ -10221,12 +10274,11 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
   render: function render(h, _ref) {
     var props = _ref.props,
-        data = _ref.data,
-        children = _ref.children;
+        data = _ref.data;
 
-    data.staticClass = ('divider ' + (data.staticClass || '')).trim();
+    data.staticClass = ('v-divider ' + (data.staticClass || '')).trim();
 
-    if (props.inset) data.staticClass += ' divider--inset';
+    if (props.inset) data.staticClass += ' v-divider--inset';
     if (props.light) data.staticClass += ' theme--light';
     if (props.dark) data.staticClass += ' theme--dark';
 
@@ -10419,9 +10471,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
   render: function render(h) {
     var data = {
-      staticClass: 'menu',
+      staticClass: 'v-menu',
       class: {
-        'menu--disabled': this.disabled
+        'v-menu--disabled': this.disabled
       },
       style: {
         display: this.fullWidth ? 'block' : 'inline-block'
@@ -10473,7 +10525,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         this.isActive = false;
       }
     },
-    mouseEnterHandler: function mouseEnterHandler(e) {
+    mouseEnterHandler: function mouseEnterHandler() {
       var _this = this;
 
       this.runDelay('open', function () {
@@ -10533,9 +10585,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       if (!this.$slots.activator) return null;
 
       var options = {
-        staticClass: 'menu__activator',
+        staticClass: 'v-menu__activator',
         'class': {
-          'menu__activator--active': this.hasJustFocused || this.isActive
+          'v-menu__activator--active': this.hasJustFocused || this.isActive
         },
         ref: 'activator',
         on: {}
@@ -10588,7 +10640,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           _this2 = this;
 
       var options = {
-        staticClass: 'menu__content',
+        staticClass: 'v-menu__content',
         'class': (_class = {}, _defineProperty(_class, this.contentClass.trim(), true), _defineProperty(_class, 'menuable__content__active', this.isActive), _defineProperty(_class, 'theme--dark', this.dark), _defineProperty(_class, 'theme--light', this.light), _class),
         style: this.styles,
         directives: this.genDirectives(),
@@ -10642,11 +10694,11 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
       if (next in this.tiles) {
         var tile = this.tiles[next];
-        tile.classList.add('list__tile--highlighted');
+        tile.classList.add('v-list__tile--highlighted');
         this.$refs.content.scrollTop = tile.offsetTop - tile.clientHeight;
       }
 
-      prev in this.tiles && this.tiles[prev].classList.remove('list__tile--highlighted');
+      prev in this.tiles && this.tiles[prev].classList.remove('v-list__tile--highlighted');
     }
   },
 
@@ -10676,7 +10728,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       }
     },
     getTiles: function getTiles() {
-      this.tiles = this.$refs.content.querySelectorAll('.list__tile');
+      this.tiles = this.$refs.content.querySelectorAll('.v-list__tile');
     }
   }
 });
@@ -10777,9 +10829,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         children = _ref.children,
         props = _ref.props;
 
-    data.staticClass = ('subheader ' + (data.staticClass || '')).trim();
+    data.staticClass = ('v-subheader ' + (data.staticClass || '')).trim();
 
-    if (props.inset) data.staticClass += ' subheader--inset';
+    if (props.inset) data.staticClass += ' v-subheader--inset';
     if (props.light) data.staticClass += ' theme--light';
     if (props.dark) data.staticClass += ' theme--dark';
 
@@ -10838,10 +10890,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   computed: {
     classes: function classes() {
       return {
-        'list--dense': this.dense,
-        'list--subheader': this.subheader,
-        'list--two-line': this.twoLine,
-        'list--three-line': this.threeLine,
+        'v-list--dense': this.dense,
+        'v-list--subheader': this.subheader,
+        'v-list--two-line': this.twoLine,
+        'v-list--three-line': this.threeLine,
         'theme--dark': this.dark,
         'theme--light': this.light
       };
@@ -10861,7 +10913,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         this.groups.splice(index, 1);
       }
     },
-    listClick: function listClick(uid, isBooted) {
+    listClick: function listClick(uid) {
       if (this.expand) return;
 
       for (var i = this.groups.length; i--;) {
@@ -10872,7 +10924,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
   render: function render(h) {
     var data = {
-      staticClass: 'list',
+      staticClass: 'v-list',
       'class': this.classes
     };
 
@@ -10946,19 +10998,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: {
     groupClasses: function groupClasses() {
       return {
-        'list__group--active': this.isActive,
-        'list__group--disabled': this.disabled
+        'v-list__group--active': this.isActive,
+        'v-list__group--disabled': this.disabled
       };
     },
     headerClasses: function headerClasses() {
       return {
-        'list__group__header--active': this.isActive,
-        'list__group__header--sub-group': this.subGroup
+        'v-list__group__header--active': this.isActive,
+        'v-list__group__header--sub-group': this.subGroup
       };
     },
     itemsClasses: function itemsClasses() {
       return {
-        'list__group__items--no-action': this.noAction
+        'v-list__group__items--no-action': this.noAction
       };
     }
   },
@@ -11009,12 +11061,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (!icon && !this.$slots.appendIcon) return null;
 
       return this.$createElement('div', {
-        staticClass: 'list__group__header__append-icon'
+        staticClass: 'v-list__group__header__append-icon'
       }, [this.$slots.appendIcon || this.genIcon(icon)]);
     },
     genGroup: function genGroup() {
       return this.$createElement('div', {
-        staticClass: 'list__group__header',
+        staticClass: 'v-list__group__header',
         'class': this.headerClasses,
         on: Object.assign({}, {
           click: this.click
@@ -11024,7 +11076,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     genItems: function genItems() {
       return this.$createElement('div', {
-        staticClass: 'list__group__items',
+        staticClass: 'v-list__group__items',
         'class': this.itemsClasses,
         directives: [{
           name: 'show',
@@ -11039,7 +11091,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (!icon && !this.$slots.prependIcon) return null;
 
       return this.$createElement('div', {
-        staticClass: 'list__group__header__prepend-icon',
+        staticClass: 'v-list__group__header__prepend-icon',
         'class': _defineProperty({}, this.activeClass, this.isActive)
       }, [this.$slots.prependIcon || this.genIcon(icon)]);
     },
@@ -11054,7 +11106,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   render: function render(h) {
     return h('div', {
-      staticClass: 'list__group',
+      staticClass: 'v-list__group',
       'class': this.groupClasses
     }, [this.genGroup(), h(__WEBPACK_IMPORTED_MODULE_4__transitions__["a" /* VExpandTransition */], [this.genItems()])]);
   }
@@ -11094,7 +11146,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   data: function data() {
     return {
-      proxyClass: 'list__tile--active'
+      proxyClass: 'v-list__tile--active'
     };
   },
 
@@ -11114,11 +11166,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     classes: function classes() {
       return _defineProperty({
-        'list__tile': true,
-        'list__tile--link': this.isLink && !this.inactive,
-        'list__tile--avatar': this.avatar,
-        'list__tile--disabled': this.disabled,
-        'list__tile--active': !this.to && this.isActive
+        'v-list__tile': true,
+        'v-list__tile--link': this.isLink && !this.inactive,
+        'v-list__tile--avatar': this.avatar,
+        'v-list__tile--disabled': this.disabled,
+        'v-list__tile--active': !this.to && this.isActive
       }, this.activeClass, this.isActive);
     },
     isLink: function isLink() {
@@ -11164,8 +11216,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var data = _ref.data,
         children = _ref.children;
 
-    data.staticClass = data.staticClass ? 'list__tile__action ' + data.staticClass : 'list__tile__action';
-    if ((children || []).length > 1) data.staticClass += ' list__tile__action--stack';
+    data.staticClass = data.staticClass ? 'v-list__tile__action ' + data.staticClass : 'v-list__tile__action';
+    if ((children || []).length > 1) data.staticClass += ' v-list__tile__action--stack';
 
     return h('div', data, children);
   }
@@ -11199,7 +11251,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         children = _ref.children,
         props = _ref.props;
 
-    data.staticClass = ('list__tile__avatar ' + (data.staticClass || '')).trim();
+    data.staticClass = ('v-list__tile__avatar ' + (data.staticClass || '')).trim();
 
     var avatar = h(__WEBPACK_IMPORTED_MODULE_0__VAvatar__["a" /* default */], {
       props: {
@@ -11241,7 +11293,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     getPropertyFromItem: function getPropertyFromItem(item, field) {
       if (item !== Object(item)) return item;
 
-      var value = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["h" /* getObjectValueByPath */])(item, field);
+      var value = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["i" /* getObjectValueByPath */])(item, field);
 
       return typeof value === 'undefined' ? item : value;
     }
@@ -11309,7 +11361,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     autocomplete: Boolean,
     browserAutocomplete: {
       type: String,
-      default: 'on'
+      default: 'off'
     },
     cacheItems: Boolean,
     chips: Boolean,
@@ -11531,7 +11583,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var VTableOverflow = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('table__overflow');
+var VTableOverflow = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleFunctional */])('v-table__overflow');
 
 
 
@@ -11572,17 +11624,17 @@ __WEBPACK_IMPORTED_MODULE_1__VDataTable__["a" /* default */].install = function 
 
 
 // Importing does not work properly
-var VTableOverflow = Object(__WEBPACK_IMPORTED_MODULE_7__util_helpers__["d" /* createSimpleFunctional */])('table__overflow');
+var VTableOverflow = Object(__WEBPACK_IMPORTED_MODULE_7__util_helpers__["e" /* createSimpleFunctional */])('v-table__overflow');
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'v-data-table',
 
   data: function data() {
     return {
-      actionsClasses: 'datatable__actions',
-      actionsRangeControlsClasses: 'datatable__actions__range-controls',
-      actionsSelectClasses: 'datatable__actions__select',
-      actionsPaginationClasses: 'datatable__actions__pagination'
+      actionsClasses: 'v-datatable__actions',
+      actionsRangeControlsClasses: 'v-datatable__actions__range-controls',
+      actionsSelectClasses: 'v-datatable__actions__select',
+      actionsPaginationClasses: 'v-datatable__actions__pagination'
     };
   },
 
@@ -11617,7 +11669,7 @@ var VTableOverflow = Object(__WEBPACK_IMPORTED_MODULE_7__util_helpers__["d" /* c
 
         return items.filter(function (item) {
           return props.some(function (prop) {
-            return filter(Object(__WEBPACK_IMPORTED_MODULE_7__util_helpers__["h" /* getObjectValueByPath */])(item, prop), search);
+            return filter(Object(__WEBPACK_IMPORTED_MODULE_7__util_helpers__["i" /* getObjectValueByPath */])(item, prop), search);
           });
         });
       }
@@ -11627,8 +11679,8 @@ var VTableOverflow = Object(__WEBPACK_IMPORTED_MODULE_7__util_helpers__["d" /* c
   computed: {
     classes: function classes() {
       return {
-        'datatable table': true,
-        'datatable--select-all': this.selectAll !== false,
+        'v-datatable v-table': true,
+        'v-datatable--select-all': this.selectAll !== false,
         'theme--dark': this.dark,
         'theme--light': this.light
       };
@@ -11854,7 +11906,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
       if (this.isExpanded(props.item)) {
         var expand = this.$createElement('div', {
-          class: 'datatable__expand-content',
+          class: 'v-datatable__expand-content',
           key: props.item[this.itemKey]
         }, this.$scopedSlots.expand(props));
 
@@ -11862,15 +11914,15 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       }
 
       var transition = this.$createElement('transition-group', {
-        class: 'datatable__expand-col',
+        class: 'v-datatable__expand-col',
         attrs: { colspan: this.headerColumns },
         props: {
           tag: 'td'
         },
-        on: Object(__WEBPACK_IMPORTED_MODULE_0__transitions_expand_transition__["a" /* default */])('datatable__expand-col--expanded')
+        on: Object(__WEBPACK_IMPORTED_MODULE_0__transitions_expand_transition__["a" /* default */])('v-datatable__expand-col--expanded')
       }, children);
 
-      return this.genTR([transition], { class: 'datatable__expand-row' });
+      return this.genTR([transition], { class: 'v-datatable__expand-row' });
     },
     genFilteredItems: function genFilteredItems() {
       if (!this.$scopedSlots.items) {
@@ -11958,7 +12010,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       }, [this.genProgress()]);
 
       return this.genTR([col], {
-        staticClass: 'datatable__progress'
+        staticClass: 'v-datatable__progress'
       });
     }
   }
@@ -12039,7 +12091,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       var _this = this;
 
       return this.$createElement('div', {
-        'class': 'small-dialog__actions'
+        'class': 'v-small-dialog__actions'
       }, [this.genButton(this.cancel, this.cancelText), this.genButton(function () {
         return _this.save(_this.returnValue);
       }, this.saveText)]);
@@ -12064,9 +12116,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     var _this3 = this;
 
     return h(__WEBPACK_IMPORTED_MODULE_3__VMenu__["a" /* default */], {
-      'class': 'small-dialog',
+      'class': 'v-small-dialog',
       props: {
-        contentClass: 'small-dialog__content',
+        contentClass: 'v-small-dialog__content',
         transition: this.transition,
         origin: 'top right',
         right: true,
@@ -12550,8 +12602,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
     }
     this.setInputDate();
   },
-  render: function render(h) {
-    return this.genPicker('picker--date');
+  render: function render() {
+    return this.genPicker('v-picker--date');
   }
 });
 
@@ -12707,9 +12759,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   methods: {
     genTitle: function genTitle() {
       return this.$createElement('div', {
-        staticClass: 'picker__title',
+        staticClass: 'v-picker__title',
         'class': this.addBackgroundColorClassChecks({
-          'picker__title--landscape': this.landscape
+          'v-picker__title--landscape': this.landscape
         }, this.computedTitleColor)
       }, this.$slots.title);
     },
@@ -12722,7 +12774,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     genBody: function genBody() {
       return this.$createElement('div', {
-        staticClass: 'picker__body',
+        staticClass: 'v-picker__body',
         style: this.fullWidth ? undefined : {
           width: this.width + 'px'
         }
@@ -12730,16 +12782,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     genActions: function genActions() {
       return this.$createElement('div', {
-        staticClass: 'picker__actions card__actions'
+        staticClass: 'v-picker__actions v-card__actions'
       }, this.$slots.actions);
     }
   },
 
   render: function render(h) {
     return h(__WEBPACK_IMPORTED_MODULE_1__VCard__["a" /* default */], {
-      staticClass: 'picker',
+      staticClass: 'v-picker',
       'class': _extends({
-        'picker--landscape': this.landscape
+        'v-picker--landscape': this.landscape
       }, this.themeClasses)
     }, [this.$slots.title ? this.genTitle() : null, this.genBody(), this.$slots.actions ? this.genActions() : null]);
   }
@@ -12896,11 +12948,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
   render: function render(h) {
     return h('ul', {
-      staticClass: 'expansion-panel',
+      staticClass: 'v-expansion-panel',
       'class': _extends({
-        'expansion-panel--focusable': this.focusable,
-        'expansion-panel--popout': this.popout,
-        'expansion-panel--inset': this.inset
+        'v-expansion-panel--focusable': this.focusable,
+        'v-expansion-panel--popout': this.popout,
+        'v-expansion-panel--inset': this.inset
       }, this.themeClasses)
     }, this.$slots.default);
   }
@@ -12972,7 +13024,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     genBody: function genBody() {
       return this.$createElement('div', {
         ref: 'body',
-        class: 'expansion-panel__body',
+        class: 'v-expansion-panel__body',
         directives: [{
           name: 'show',
           value: this.isActive
@@ -12983,7 +13035,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this = this;
 
       return this.$createElement('div', {
-        staticClass: 'expansion-panel__header',
+        staticClass: 'v-expansion-panel__header',
         directives: [{
           name: 'ripple',
           value: this.ripple
@@ -13035,9 +13087,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     children.push(h(__WEBPACK_IMPORTED_MODULE_0__transitions__["a" /* VExpandTransition */], [this.genBody()]));
 
     return h('li', {
-      staticClass: 'expansion-panel__container',
+      staticClass: 'v-expansion-panel__container',
       'class': {
-        'expansion-panel__container--active': this.isActive
+        'v-expansion-panel__container--active': this.isActive
       },
       attrs: {
         tabindex: 0
@@ -13144,11 +13196,11 @@ __WEBPACK_IMPORTED_MODULE_0__VFooter__["a" /* default */].install = function ins
 
   render: function render(h) {
     var data = {
-      staticClass: 'footer',
+      staticClass: 'v-footer',
       'class': this.addBackgroundColorClassChecks({
-        'footer--absolute': this.absolute,
-        'footer--fixed': !this.absolute && (this.app || this.fixed),
-        'footer--inset': this.inset,
+        'v-footer--absolute': this.absolute,
+        'v-footer--fixed': !this.absolute && (this.app || this.fixed),
+        'v-footer--inset': this.inset,
         'theme--dark': this.dark,
         'theme--light': this.light
       }),
@@ -13344,7 +13396,7 @@ __WEBPACK_IMPORTED_MODULE_0__VForm__["a" /* default */].install = function insta
 
 
 
-var VSpacer = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('spacer');
+var VSpacer = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleFunctional */])('spacer');
 
 
 
@@ -13585,23 +13637,23 @@ __WEBPACK_IMPORTED_MODULE_0__VNavigationDrawer__["a" /* default */].install = fu
     },
     classes: function classes() {
       return {
-        'navigation-drawer': true,
-        'navigation-drawer--absolute': this.absolute,
-        'navigation-drawer--clipped': this.clipped,
-        'navigation-drawer--close': !this.isActive,
-        'navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
-        'navigation-drawer--floating': this.floating,
-        'navigation-drawer--is-mobile': this.isMobile,
-        'navigation-drawer--mini-variant': this.miniVariant,
-        'navigation-drawer--open': this.isActive,
-        'navigation-drawer--right': this.right,
-        'navigation-drawer--temporary': this.temporary,
+        'v-navigation-drawer': true,
+        'v-navigation-drawer--absolute': this.absolute,
+        'v-navigation-drawer--clipped': this.clipped,
+        'v-navigation-drawer--close': !this.isActive,
+        'v-navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
+        'v-navigation-drawer--floating': this.floating,
+        'v-navigation-drawer--is-mobile': this.isMobile,
+        'v-navigation-drawer--mini-variant': this.miniVariant,
+        'v-navigation-drawer--open': this.isActive,
+        'v-navigation-drawer--right': this.right,
+        'v-navigation-drawer--temporary': this.temporary,
         'theme--dark': this.dark,
         'theme--light': this.light
       };
     },
     isMobile: function isMobile() {
-      return !this.permanent && !this.temporary && this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10);
+      return !this.stateless && !this.permanent && !this.temporary && this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10);
     },
     marginTop: function marginTop() {
       if (!this.app) return 0;
@@ -13787,11 +13839,15 @@ __WEBPACK_IMPORTED_MODULE_0__VNavigationDrawer__["a" /* default */].install = fu
           if (!_this2.miniVariant) return;
 
           _this2.$emit('update:miniVariant', false);
+        },
+        transitionend: function transitionend(e) {
+          _this2.$emit('transitionend', e);
+          window.dispatchEvent(new Event('resize'));
         }
       }
     };
 
-    return h('aside', data, [this.$slots.default, h('div', { 'class': 'navigation-drawer__border' })]);
+    return h('aside', data, [this.$slots.default, h('div', { 'class': 'v-navigation-drawer__border' })]);
   }
 });
 
@@ -13879,9 +13935,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   computed: {
     classes: function classes() {
       return {
-        'pagination': true,
-        'pagination--circle': this.circle,
-        'pagination--disabled': this.disabled
+        'v-pagination': true,
+        'v-pagination--circle': this.circle,
+        'v-pagination--disabled': this.disabled
       };
     },
     items: function items() {
@@ -13922,6 +13978,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
       this.selected = null;
 
+      this.$nextTick(this.onResize);
       // TODO: Change this (f75dee3a, cbdf7caa)
       setTimeout(function () {
         return _this.selected = _this.value;
@@ -13955,9 +14012,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     },
     genIcon: function genIcon(h, icon, disabled, fn) {
       return h('li', [h('button', {
-        staticClass: 'pagination__navigation',
+        staticClass: 'v-pagination__navigation',
         class: {
-          'pagination__navigation--disabled': disabled
+          'v-pagination__navigation--disabled': disabled
         },
         on: disabled ? {} : { click: fn }
       }, [h(__WEBPACK_IMPORTED_MODULE_1__VIcon__["a" /* default */], [icon])])]);
@@ -13966,9 +14023,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       var _this2 = this;
 
       return h('button', {
-        staticClass: 'pagination__item',
+        staticClass: 'v-pagination__item',
         class: i === this.value ? this.addBackgroundColorClassChecks({
-          'pagination__item--active': true
+          'v-pagination__item--active': true
         }) : {},
         on: {
           click: function click() {
@@ -13981,7 +14038,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       var _this3 = this;
 
       return this.items.map(function (i, index) {
-        return h('li', { key: index }, [isNaN(i) ? h('span', { class: 'pagination__more' }, [i]) : _this3.genItem(h, i)]);
+        return h('li', { key: index }, [isNaN(i) ? h('span', { class: 'v-pagination__more' }, [i]) : _this3.genItem(h, i)]);
       });
     }
   },
@@ -13990,7 +14047,11 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     var children = [this.genIcon(h, this.prevIcon, this.value <= 1, this.previous), this.genItems(h), this.genIcon(h, this.nextIcon, this.value >= this.length, this.next)];
 
     return h('ul', {
-      directives: [{ name: 'resize', value: this.onResize }],
+      directives: [{
+        modifiers: { quiet: true },
+        name: 'resize',
+        value: this.onResize
+      }],
       class: this.classes
     }, children);
   }
@@ -14097,7 +14158,7 @@ __WEBPACK_IMPORTED_MODULE_0__VParallax__["a" /* default */].install = function i
 
   render: function render(h) {
     var imgData = {
-      staticClass: 'parallax__image',
+      staticClass: 'v-parallax__image',
       style: this.styles,
       attrs: {
         src: this.src
@@ -14108,15 +14169,15 @@ __WEBPACK_IMPORTED_MODULE_0__VParallax__["a" /* default */].install = function i
     if (this.alt) imgData.attrs.alt = this.alt;
 
     var container = h('div', {
-      staticClass: 'parallax__image-container'
+      staticClass: 'v-parallax__image-container'
     }, [h('img', imgData)]);
 
     var content = h('div', {
-      staticClass: 'parallax__content'
+      staticClass: 'v-parallax__content'
     }, this.$slots.default);
 
     return h('div', {
-      staticClass: 'parallax',
+      staticClass: 'v-parallax',
       style: {
         height: this.normalizedHeight + 'px'
       },
@@ -14358,7 +14419,7 @@ __WEBPACK_IMPORTED_MODULE_0__VRadioGroup__["a" /* default */].install = function
     }
   },
 
-  render: function render(h) {
+  render: function render() {
     var data = {
       attrs: {
         role: 'radiogroup'
@@ -14523,7 +14584,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   },
   render: function render(h) {
     var transition = h(__WEBPACK_IMPORTED_MODULE_0__transitions__["b" /* VFadeTransition */], {}, [h(__WEBPACK_IMPORTED_MODULE_1__VIcon__["a" /* default */], {
-      staticClass: 'icon--selection-control',
+      staticClass: 'v-icon--selection-control',
       'class': {
         'icon--radio': this.isActive
       },
@@ -14804,7 +14865,7 @@ __WEBPACK_IMPORTED_MODULE_0__VSlider__["a" /* default */].install = function ins
           this.inputValue = this.inputValue - _direction * step * (steps > 100 ? steps / 10 : 10);
         }
     },
-    onKeyUp: function onKeyUp(e) {
+    onKeyUp: function onKeyUp() {
       this.keyPressed = 0;
     },
     sliderMove: function sliderMove(e) {
@@ -14862,7 +14923,7 @@ __WEBPACK_IMPORTED_MODULE_0__VSlider__["a" /* default */].install = function ins
     genSteps: function genSteps(h) {
       var _this = this;
 
-      var ticks = Object(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["c" /* createRange */])(this.numTicks + 1).map(function (i) {
+      var ticks = Object(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* createRange */])(this.numTicks + 1).map(function (i) {
         var span = h('span', {
           key: i,
           staticClass: 'slider__tick',
@@ -14993,15 +15054,15 @@ __WEBPACK_IMPORTED_MODULE_0__VSnackbar__["a" /* default */].install = function i
   computed: {
     classes: function classes() {
       return {
-        'snack--active': this.isActive,
-        'snack--absolute': this.absolute,
-        'snack--auto-height': this.autoHeight,
-        'snack--bottom': this.bottom || !this.top,
-        'snack--left': this.left,
-        'snack--multi-line': this.multiLine && !this.vertical,
-        'snack--right': this.right,
-        'snack--top': this.top,
-        'snack--vertical': this.vertical
+        'v-snack--active': this.isActive,
+        'v-snack--absolute': this.absolute,
+        'v-snack--auto-height': this.autoHeight,
+        'v-snack--bottom': this.bottom || !this.top,
+        'v-snack--left': this.left,
+        'v-snack--multi-line': this.multiLine && !this.vertical,
+        'v-snack--right': this.right,
+        'v-snack--top': this.top,
+        'v-snack--vertical': this.vertical
       };
     }
   },
@@ -15044,14 +15105,14 @@ __WEBPACK_IMPORTED_MODULE_0__VSnackbar__["a" /* default */].install = function i
 
     if (this.isActive) {
       children.push(h('div', {
-        staticClass: 'snack',
+        staticClass: 'v-snack',
         class: this.classes,
         on: this.$listeners
       }, [h('div', {
-        staticClass: 'snack__wrapper',
+        staticClass: 'v-snack__wrapper',
         class: this.addBackgroundColorClassChecks()
       }, [h('div', {
-        staticClass: 'snack__content'
+        staticClass: 'v-snack__content'
       }, this.$slots.default)])]));
     }
 
@@ -15128,14 +15189,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: {
     classes: function classes() {
       return _defineProperty({
-        'speed-dial': true,
-        'speed-dial--top': this.top,
-        'speed-dial--right': this.right,
-        'speed-dial--bottom': this.bottom,
-        'speed-dial--left': this.left,
-        'speed-dial--absolute': this.absolute,
-        'speed-dial--fixed': this.fixed
-      }, 'speed-dial--direction-' + this.direction, true);
+        'v-speed-dial': true,
+        'v-speed-dial--top': this.top,
+        'v-speed-dial--right': this.right,
+        'v-speed-dial--bottom': this.bottom,
+        'v-speed-dial--left': this.left,
+        'v-speed-dial--absolute': this.absolute,
+        'v-speed-dial--fixed': this.fixed
+      }, 'v-speed-dial--direction-' + this.direction, true);
     }
   },
 
@@ -15176,7 +15237,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
 
     var list = h('transition-group', {
-      'class': 'speed-dial__list',
+      'class': 'v-speed-dial__list',
       props: {
         name: this.transition,
         mode: this.mode,
@@ -15214,8 +15275,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var VStepperHeader = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('stepper__header');
-var VStepperItems = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('stepper__items');
+var VStepperHeader = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleFunctional */])('v-stepper__header');
+var VStepperItems = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleFunctional */])('v-stepper__items');
 
 
 
@@ -15273,11 +15334,11 @@ __WEBPACK_IMPORTED_MODULE_1__VStepper__["a" /* default */].install = function in
   computed: {
     classes: function classes() {
       return {
-        'stepper': true,
-        'stepper--is-booted': this.isBooted,
-        'stepper--vertical': this.vertical,
-        'stepper--alt-labels': this.altLabels,
-        'stepper--non-linear': this.nonLinear,
+        'v-stepper': true,
+        'v-stepper--is-booted': this.isBooted,
+        'v-stepper--vertical': this.vertical,
+        'v-stepper--alt-labels': this.altLabels,
+        'v-stepper--non-linear': this.nonLinear,
         'theme--dark': this.dark,
         'theme--light': this.light
       };
@@ -15413,12 +15474,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: {
     classes: function classes() {
       return {
-        'stepper__step': true,
-        'stepper__step--active': this.isActive,
-        'stepper__step--editable': this.editable,
-        'stepper__step--inactive': this.isInactive,
-        'stepper__step--error': this.hasError,
-        'stepper__step--complete': this.complete,
+        'v-stepper__step': true,
+        'v-stepper__step--active': this.isActive,
+        'v-stepper__step--editable': this.editable,
+        'v-stepper__step--inactive': this.isInactive,
+        'v-stepper__step--error': this.hasError,
+        'v-stepper__step--complete': this.complete,
         'error--text': this.hasError
       };
     },
@@ -15467,12 +15528,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
 
     var step = h('span', {
-      staticClass: 'stepper__step__step',
+      staticClass: 'v-stepper__step__step',
       'class': _defineProperty({}, this.color, !this.hasError && (this.complete || this.isActive))
     }, stepContent);
 
     var label = h('div', {
-      staticClass: 'stepper__label'
+      staticClass: 'v-stepper__label'
     }, this.$slots.default);
 
     return h('div', data, [step, label]);
@@ -15512,7 +15573,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: {
     classes: function classes() {
       return {
-        'stepper__content': true
+        'v-stepper__content': true
       };
     },
     computedTransition: function computedTransition() {
@@ -15527,7 +15588,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     wrapperClasses: function wrapperClasses() {
       return {
-        'stepper__wrapper': true
+        'v-stepper__wrapper': true
       };
     }
   },
@@ -15782,11 +15843,11 @@ __WEBPACK_IMPORTED_MODULE_0__VSystemBar__["a" /* default */].install = function 
   computed: {
     classes: function classes() {
       return this.addBackgroundColorClassChecks(Object.assign({
-        'system-bar--lights-out': this.lightsOut,
-        'system-bar--absolute': this.absolute,
-        'system-bar--fixed': !this.absolute && (this.app || this.fixed),
-        'system-bar--status': this.status,
-        'system-bar--window': this.window
+        'v-system-bar--lights-out': this.lightsOut,
+        'v-system-bar--absolute': this.absolute,
+        'v-system-bar--fixed': !this.absolute && (this.app || this.fixed),
+        'v-system-bar--status': this.status,
+        'v-system-bar--window': this.window
       }, this.themeClasses));
     },
     computedHeight: function computedHeight() {
@@ -15809,7 +15870,7 @@ __WEBPACK_IMPORTED_MODULE_0__VSystemBar__["a" /* default */].install = function 
 
   render: function render(h) {
     var data = {
-      staticClass: 'system-bar',
+      staticClass: 'v-system-bar',
       'class': this.classes,
       style: {
         height: this.computedHeight + 'px'
@@ -15934,35 +15995,53 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
       tabsContainer: null,
       tabs: [],
       tabItems: null,
-      transitionTime: 300
+      transitionTime: 300,
+      widths: {
+        bar: 0,
+        container: 0,
+        wrapper: 0
+      }
     };
   },
 
 
+  watch: {
+    tabs: 'onResize'
+  },
+
+  mounted: function mounted() {
+    this.checkIcons();
+  },
+
+
   methods: {
+    checkIcons: function checkIcons() {
+      this.prevIconVisible = this.checkPrevIcon();
+      this.nextIconVisible = this.checkNextIcon();
+    },
     checkPrevIcon: function checkPrevIcon() {
       return this.scrollOffset > 0;
     },
     checkNextIcon: function checkNextIcon() {
       // Check one scroll ahead to know the width of right-most item
-      var container = this.$refs.container;
-      var wrapper = this.$refs.wrapper;
-
-      return container.clientWidth > this.scrollOffset + wrapper.clientWidth;
+      return this.widths.container > this.scrollOffset + this.widths.wrapper;
     },
     callSlider: function callSlider() {
-      this.setOverflow();
+      var _this = this;
+
       if (this.hideSlider || !this.activeTab) return false;
 
       // Give screen time to paint
-      var action = this.activeTab.action;
+      var action = (this.activeTab || {}).action;
       var activeTab = action === this.activeTab ? this.activeTab : this.tabs.find(function (tab) {
         return tab.action === action;
       });
 
-      if (!activeTab) return;
-      this.sliderWidth = activeTab.$el.scrollWidth;
-      this.sliderLeft = activeTab.$el.offsetLeft;
+      this.$nextTick(function () {
+        if (!activeTab || !activeTab.$el) return;
+        _this.sliderWidth = activeTab.$el.scrollWidth;
+        _this.sliderLeft = activeTab.$el.offsetLeft;
+      });
     },
 
     /**
@@ -15970,15 +16049,19 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
      * width of the container, call resize
      * after the transition is complete
      */
-    onContainerResize: function onContainerResize() {
-      clearTimeout(this.resizeTimeout);
-      this.resizeTimeout = setTimeout(this.callSlider, this.transitionTime);
-    },
     onResize: function onResize() {
+      var _this2 = this;
+
       if (this._isDestroyed) return;
 
-      this.callSlider();
-      this.scrollIntoView();
+      this.setWidths();
+
+      clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = setTimeout(function () {
+        _this2.callSlider();
+        _this2.scrollIntoView();
+        _this2.checkIcons();
+      }, this.transitionTime);
     },
     overflowCheck: function overflowCheck(e, fn) {
       this.isOverflowing && fn(e);
@@ -15987,16 +16070,25 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
       this.scrollOffset = this.newOffset(direction);
     },
     setOverflow: function setOverflow() {
-      this.isOverflowing = this.$refs.bar.clientWidth < this.$refs.container.clientWidth;
+      this.isOverflowing = this.widths.bar < this.widths.container;
+    },
+    setWidths: function setWidths() {
+      var bar = this.$refs.bar ? this.$refs.bar.clientWidth : 0;
+      var container = this.$refs.container ? this.$refs.container.clientWidth : 0;
+      var wrapper = this.$refs.wrapper ? this.$refs.wrapper.clientWidth : 0;
+
+      this.widths = { bar: bar, container: container, wrapper: wrapper };
+
+      this.setOverflow();
     },
     findActiveLink: function findActiveLink() {
-      var _this = this;
+      var _this3 = this;
 
       if (!this.tabs.length || this.lazyValue) return;
 
       var activeIndex = this.tabs.findIndex(function (tabItem, index) {
         var id = tabItem.action === tabItem ? index.toString() : tabItem.action;
-        return id === _this.lazyValue || tabItem.$el.firstChild.className.indexOf(_this.activeClass) > -1;
+        return id === _this3.lazyValue || tabItem.$el.firstChild.className.indexOf(_this3.activeClass) > -1;
       });
 
       var index = activeIndex > -1 ? activeIndex : 0;
@@ -16042,18 +16134,18 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
       this.tabs.push(options);
     },
     scrollIntoView: function scrollIntoView() {
-      if (!this.activeTab) return false;
+      if (!this.activeTab) return;
+      if (!this.isOverflowing) return this.scrollOffset = 0;
 
+      var totalWidth = this.widths.wrapper + this.scrollOffset;
       var _activeTab$$el = this.activeTab.$el,
           clientWidth = _activeTab$$el.clientWidth,
           offsetLeft = _activeTab$$el.offsetLeft;
 
-      var wrapperWidth = this.$refs.wrapper.clientWidth;
-      var totalWidth = wrapperWidth + this.scrollOffset;
       var itemOffset = clientWidth + offsetLeft;
       var additionalOffset = clientWidth * 0.3;
 
-      /* instanbul ignore else */
+      /* istanbul ignore else */
       if (offsetLeft < this.scrollOffset) {
         this.scrollOffset = Math.max(offsetLeft - additionalOffset, 0);
       } else if (totalWidth < itemOffset) {
@@ -16065,7 +16157,7 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
       this.scrollIntoView();
     },
     tabProxy: function tabProxy(val) {
-      this.inputValue = val;
+      this.lazyValue = val;
     },
     registerItems: function registerItems(fn) {
       this.tabItems = fn;
@@ -16087,10 +16179,6 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
     }
   },
 
-  mounted: function mounted() {
-    this.prevIconVisible = this.checkPrevIcon();
-    this.nextIconVisible = this.checkNextIcon();
-  },
   render: function render(h) {
     var _parseNodes = this.parseNodes(),
         tab = _parseNodes.tab,
@@ -16099,7 +16187,7 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
         item = _parseNodes.item;
 
     return h('div', {
-      staticClass: 'tabs',
+      staticClass: 'v-tabs',
       directives: [{
         name: 'resize',
         arg: 400,
@@ -16199,7 +16287,7 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
   methods: {
     genBar: function genBar(items) {
       return this.$createElement('div', {
-        staticClass: 'tabs__bar',
+        staticClass: 'v-tabs__bar',
         'class': this.addBackgroundColorClassChecks({
           'theme--dark': this.dark,
           'theme--light': this.light
@@ -16209,15 +16297,15 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
     },
     genContainer: function genContainer(items) {
       return this.$createElement('div', {
-        staticClass: 'tabs__container',
+        staticClass: 'v-tabs__container',
         class: {
-          'tabs__container--align-with-title': this.alignWithTitle,
-          'tabs__container--centered': this.centered,
-          'tabs__container--fixed-tabs': this.fixedTabs,
-          'tabs__container--grow': this.grow,
-          'tabs__container--icons-and-text': this.iconsAndText,
-          'tabs__container--overflow': this.isOverflowing,
-          'tabs__container--right': this.right
+          'v-tabs__container--align-with-title': this.alignWithTitle,
+          'v-tabs__container--centered': this.centered,
+          'v-tabs__container--fixed-tabs': this.fixedTabs,
+          'v-tabs__container--grow': this.grow,
+          'v-tabs__container--icons-and-text': this.iconsAndText,
+          'v-tabs__container--overflow': this.isOverflowing,
+          'v-tabs__container--right': this.right
         },
         style: this.containerStyles,
         ref: 'container'
@@ -16229,7 +16317,7 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
       if (!this.hasArrows || !this[direction + 'IconVisible']) return null;
 
       return this.$createElement(__WEBPACK_IMPORTED_MODULE_2__VIcon__["a" /* default */], {
-        staticClass: 'tabs__icon tabs__icon--' + direction,
+        staticClass: 'v-tabs__icon v-tabs__icon--' + direction,
         props: {
           disabled: !this[direction + 'IconVisible']
         },
@@ -16255,9 +16343,9 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
       var _this2 = this;
 
       return this.$createElement('div', {
-        staticClass: 'tabs__wrapper',
+        staticClass: 'v-tabs__wrapper',
         class: {
-          'tabs__wrapper--show-arrows': this.hasArrows
+          'v-tabs__wrapper--show-arrows': this.hasArrows
         },
         ref: 'wrapper',
         directives: [{
@@ -16284,7 +16372,7 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
       }
 
       return this.$createElement('div', {
-        staticClass: 'tabs__slider-wrapper',
+        staticClass: 'v-tabs__slider-wrapper',
         style: this.sliderStyles
       }, items);
     }
@@ -16413,6 +16501,10 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
     alignWithTitle: 'callSlider',
     centered: 'callSlider',
     fixedTabs: 'callSlider',
+    hasArrows: function hasArrows(val) {
+      if (!val) this.scrollOffset = 0;
+    },
+
     isBooted: 'findActiveLink',
     lazyValue: 'updateTabs',
     right: 'callSlider',
@@ -16420,8 +16512,8 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
       this.lazyValue = val;
     },
 
-    '$vuetify.application.left': 'onContainerResize',
-    '$vuetify.application.right': 'onContainerResize',
+    '$vuetify.application.left': 'onResize',
+    '$vuetify.application.right': 'onResize',
     scrollOffset: function scrollOffset(val) {
       this.$refs.container.style.transform = 'translateX(' + -val + 'px)';
       if (this.hasArrows) {
@@ -16466,7 +16558,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   props: {
     activeClass: {
       type: String,
-      default: 'tabs__item--active'
+      default: 'v-tabs__item--active'
     },
     ripple: {
       type: [Boolean, Object],
@@ -16477,17 +16569,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: {
     classes: function classes() {
       return _defineProperty({
-        'tabs__item': true,
-        'tabs__item--disabled': this.disabled
+        'v-tabs__item': true,
+        'v-tabs__item--disabled': this.disabled
       }, this.activeClass, !this.to && this.isActive);
     },
     action: function action() {
       var to = this.to || this.href;
 
-      if (typeof to === 'string') return to.replace('#', '');
-      if (to === Object(to) && (to.hasOwnProperty('name') || to.hasOwnProperty('path'))) return to.name || to.path;
+      if (this.$router && this.to === Object(this.to)) {
+        var resolve = this.$router.resolve(this.to, this.$route, this.append);
 
-      return this;
+        to = resolve.href;
+      }
+
+      return typeof to === 'string' ? to.replace('#', '') : this;
     }
   },
 
@@ -16523,7 +16618,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var path = '_vnode.data.class.' + this.activeClass;
 
       this.$nextTick(function () {
-        if (Object(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["h" /* getObjectValueByPath */])(_this.$refs.link, path)) {
+        if (Object(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["i" /* getObjectValueByPath */])(_this.$refs.link, path)) {
           _this.tabClick(_this);
         }
       });
@@ -16545,7 +16640,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     data.ref = 'link';
 
     return h('div', {
-      staticClass: 'tabs__div'
+      staticClass: 'v-tabs__div'
     }, [h(tag, data, this.$slots.default)]);
   }
 });
@@ -16623,7 +16718,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   render: function render(h) {
     var data = {
-      staticClass: 'tabs__content',
+      staticClass: 'v-tabs__content',
       directives: [{
         name: 'show',
         value: this.isActive
@@ -17013,12 +17108,12 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 
 
-var rangeHours24 = Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["c" /* createRange */])(24);
-var rangeHours12am = Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["c" /* createRange */])(12);
+var rangeHours24 = Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["d" /* createRange */])(24);
+var rangeHours12am = Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["d" /* createRange */])(12);
 var rangeHours12pm = rangeHours12am.map(function (v) {
   return v + 12;
 });
-var rangeMinutes = Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["c" /* createRange */])(60);
+var rangeMinutes = Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["d" /* createRange */])(60);
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'v-time-picker',
@@ -17198,7 +17293,7 @@ var rangeMinutes = Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["c" /* cre
     },
     genPickerBody: function genPickerBody() {
       return this.$createElement('div', {
-        staticClass: 'time-picker-clock__container',
+        staticClass: 'v-time-picker-clock__container',
         style: {
           width: this.width + 'px',
           height: this.width - (!this.fullWidth && this.landscape ? 60 : 0) + 'px'
@@ -17232,8 +17327,8 @@ var rangeMinutes = Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["c" /* cre
   mounted: function mounted() {
     this.setInputData(this.value);
   },
-  render: function render(h) {
-    return this.genPicker('picker--time');
+  render: function render() {
+    return this.genPicker('v-picker--time');
   }
 });
 
@@ -17266,8 +17361,8 @@ var rangeMinutes = Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["c" /* cre
 
 
 
-var VToolbarTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('toolbar__title');
-var VToolbarItems = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('toolbar__items');
+var VToolbarTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleFunctional */])('v-toolbar__title');
+var VToolbarItems = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleFunctional */])('v-toolbar__items');
 
 
 
@@ -17394,16 +17489,16 @@ __WEBPACK_IMPORTED_MODULE_1__VToolbar__["a" /* default */].install = function in
     },
     classes: function classes() {
       return this.addBackgroundColorClassChecks({
-        'toolbar': true,
+        'v-toolbar': true,
         'elevation-0': this.flat || !this.isActive && !this.tabs && !this.scrollToolbarOffScreen,
-        'toolbar--absolute': this.absolute,
-        'toolbar--card': this.card,
-        'toolbar--clipped': this.clippedLeft || this.clippedRight,
-        'toolbar--dense': this.dense,
-        'toolbar--extended': this.isExtended,
-        'toolbar--fixed': !this.absolute && (this.app || this.fixed),
-        'toolbar--floating': this.floating,
-        'toolbar--prominent': this.prominent,
+        'v-toolbar--absolute': this.absolute,
+        'v-toolbar--card': this.card,
+        'v-toolbar--clipped': this.clippedLeft || this.clippedRight,
+        'v-toolbar--dense': this.dense,
+        'v-toolbar--extended': this.isExtended,
+        'v-toolbar--fixed': !this.absolute && (this.app || this.fixed),
+        'v-toolbar--floating': this.floating,
+        'v-toolbar--prominent': this.prominent,
         'theme--dark': this.dark,
         'theme--light': this.light
       });
@@ -17454,7 +17549,7 @@ __WEBPACK_IMPORTED_MODULE_1__VToolbar__["a" /* default */].install = function in
     manualScroll: function manualScroll(val) {
       this.isActive = !val;
     },
-    isScrollingUp: function isScrollingUp(val) {
+    isScrollingUp: function isScrollingUp() {
       this.savedScroll = this.savedScroll || this.currentScroll;
     }
   },
@@ -17509,14 +17604,14 @@ __WEBPACK_IMPORTED_MODULE_1__VToolbar__["a" /* default */].install = function in
     }];
 
     children.push(h('div', {
-      staticClass: 'toolbar__content',
+      staticClass: 'v-toolbar__content',
       style: { height: this.computedContentHeight + 'px' },
       ref: 'content'
     }, this.$slots.default));
 
     if (this.isExtended) {
       children.push(h('div', {
-        staticClass: 'toolbar__extension',
+        staticClass: 'v-toolbar__extension',
         style: { height: this.computedExtensionHeight + 'px' }
       }, this.$slots.extension));
     }
@@ -17552,7 +17647,7 @@ __WEBPACK_IMPORTED_MODULE_1__VToolbar__["a" /* default */].install = function in
         props = _ref.props,
         data = _ref.data;
 
-    var classes = data.staticClass ? data.staticClass + ' toolbar__side-icon' : 'toolbar__side-icon';
+    var classes = data.staticClass ? data.staticClass + ' v-toolbar__side-icon' : 'v-toolbar__side-icon';
 
     var d = Object.assign(data, {
       staticClass: classes,
@@ -17669,7 +17764,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var top = 0;
 
       if (this.top || this.bottom) {
-        top = activator.top - (this.top ? activator.height : -activator.height) - (this.top ? 0 : -10);
+        top = activator.top + (this.bottom ? activator.height : -content.height) + (this.bottom ? 10 : -10);
       } else if (this.left || this.right) {
         top = activator.top + activator.height / 2 - content.height / 2;
       }
@@ -17678,10 +17773,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     classes: function classes() {
       return {
-        'tooltip--top': this.top,
-        'tooltip--right': this.right,
-        'tooltip--bottom': this.bottom,
-        'tooltip--left': this.left
+        'v-tooltip--top': this.top,
+        'v-tooltip--right': this.right,
+        'v-tooltip--bottom': this.bottom,
+        'v-tooltip--left': this.left
       };
     },
     computedTransition: function computedTransition() {
@@ -17726,7 +17821,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this = this;
 
     var tooltip = h('div', {
-      staticClass: 'tooltip__content',
+      staticClass: 'v-tooltip__content',
       'class': this.addBackgroundColorClassChecks((_addBackgroundColorCl = {}, _defineProperty(_addBackgroundColorCl, this.contentClass, true), _defineProperty(_addBackgroundColorCl, 'menuable__content__active', this.isActive), _addBackgroundColorCl)),
       style: this.styles,
       attrs: this.attrs,
@@ -17738,7 +17833,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, this.$slots.default);
 
     return h(this.tag, {
-      staticClass: 'tooltip',
+      staticClass: 'v-tooltip',
       'class': this.classes
     }, [h('transition', {
       props: {
