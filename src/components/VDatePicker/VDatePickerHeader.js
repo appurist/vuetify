@@ -113,17 +113,17 @@ export default {
       }, [header])
 
       return this.$createElement('div', {
-        staticClass: 'date-picker-header__value',
+        staticClass: 'v-date-picker-header__value',
         class: {
-          'date-picker-header__value--disabled': this.disabled
+          'v-date-picker-header__value--disabled': this.disabled
         }
       }, [transition])
     }
   },
 
-  render (h) {
+  render () {
     return this.$createElement('div', {
-      staticClass: 'date-picker-header'
+      staticClass: 'v-date-picker-header'
     }, [
       this.genBtn(-1),
       this.genHeader(),

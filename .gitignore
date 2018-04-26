@@ -17,3 +17,4 @@ dev/*css
 /es5
 /release
 .env
+yarn-error.log
