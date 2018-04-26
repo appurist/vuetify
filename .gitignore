@@ -15,7 +15,6 @@ dev/*css
 !dev/lint-commit-message.js
 !dev/warn-npm-install.js
 /es5
-/dist
 /release
 .env
 yarn-error.log

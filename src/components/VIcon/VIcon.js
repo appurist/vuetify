@@ -1,4 +1,5 @@
 import '../../stylus/components/_icons.styl'
+import { getObjectValueByPath } from '../../util/helpers'
 
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
