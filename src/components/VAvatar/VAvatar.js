@@ -2,6 +2,7 @@ import '../../stylus/components/_avatars.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import { convertToUnit } from '../../util/helpers'
 
 export default {
   name: 'v-avatar',
@@ -19,12 +20,12 @@ export default {
   },
 
   render (h, { data, props, children }) {
-    data.staticClass = (`avatar ${data.staticClass || ''}`).trim()
+    data.staticClass = (`v-avatar ${data.staticClass || ''}`).trim()
     data.style = data.style || {}
 
-    if (props.tile) data.staticClass += ' avatar--tile'
+    if (props.tile) data.staticClass += ' v-avatar--tile'
 
-    const size = `${parseInt(props.size)}px`
+    const size = convertToUnit(props.size)
     data.style.height = size
     data.style.width = size
     data.class = [
