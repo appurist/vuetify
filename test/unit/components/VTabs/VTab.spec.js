@@ -140,7 +140,7 @@ test('VTab', ({ mount }) => {
   //
   // Current conversation on vue-router tests
   // https://github.com/vuejs/vue-router/issues/1768
-  it.skip('should call tabClick', async () => {
+  it('should call tabClick', async () => {
     const instance = Vue.extend()
     instance.component('router-link', stub)
     const wrapper = mount(VTab, {
@@ -182,16 +182,27 @@ test('VTab', ({ mount }) => {
       propsData: {
         href: '#foo'
       },
-      instance
+      instance,
+      globals: {
+        $route: { path: '/' },
+        $router: {
+          resolve: (to, route, append) => {
+            let href
+            if (to.path) href = to.path
+
+            return { href }
+          }
+        }
+      }
     })
 
     expect(wrapper.vm.action).toBe('foo')
     wrapper.setProps({ href: null, to: '/foo' })
     expect(wrapper.vm.action).toBe('/foo')
-    wrapper.setProps({ to: { path: '/bar' }})
-    expect(wrapper.vm.action).toBe('/bar')
     wrapper.setProps({ to: null })
     expect(wrapper.vm.action).toBe(wrapper.vm)
+    wrapper.setProps({ to: { path: 'bar' }})
+    expect(wrapper.vm.action).toBe('bar')
 
     expect(tabClick).toHaveBeenWarned()
     expect(tabsWarning).toHaveBeenTipped()

@@ -118,10 +118,11 @@ export function createRange (length) {
 
 export function getZIndex (el) {
   if (!el || el.nodeType !== Node.ELEMENT_NODE) return 0
-  var zi = document.defaultView.getComputedStyle(el).getPropertyValue('z-index')
-  if (isNaN(zi)) return getZIndex(el.parentNode)
 
-  return zi
+  const index = window.getComputedStyle(el).getPropertyValue('z-index')
+
+  if (isNaN(index)) return getZIndex(el.parentNode)
+  return index
 }
 
 const tagsToReplace = {
@@ -152,4 +153,8 @@ export function filterChildren (array = [], tag) {
     return child.componentOptions &&
       child.componentOptions.Ctor.options.name === tag
   })
+}
+
+export function convertToUnit (str, unit = 'px') {
+  return isNaN(str) ? str : `${Number(str)}${unit}`
 }
